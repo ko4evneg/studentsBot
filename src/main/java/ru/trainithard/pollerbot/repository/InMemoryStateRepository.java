@@ -17,4 +17,9 @@ public class InMemoryStateRepository implements StateRepository {
         return Optional.ofNullable(userStates.get(user));
     }
 
+    @Override
+    public void save(User user, State state) {
+        userStates.put(user, state);
+    }
+
 }

@@ -14,6 +14,11 @@ public class StateServiceImpl implements StateService {
     @Override
     public State get(User user) {
         return repository.get(user)
-                .orElse(State.FIRST_REQUEST);
+                .orElse(State.NEW_USER_FIRST_REQUEST);
+    }
+
+    @Override
+    public void save(User user, State state) {
+        repository.save(user, state);
     }
 }

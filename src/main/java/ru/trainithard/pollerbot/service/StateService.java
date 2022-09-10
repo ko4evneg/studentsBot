@@ -5,4 +5,6 @@ import ru.trainithard.pollerbot.model.User;
 
 public interface StateService {
     State get(User user);
+
+    void save(User user, State state);
 }

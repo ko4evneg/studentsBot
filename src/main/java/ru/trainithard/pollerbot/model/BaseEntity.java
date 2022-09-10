@@ -14,7 +14,11 @@ import java.util.Objects;
 public class BaseEntity {
     @Id
     @Column(name = "id")
-    private Long id;
+    protected Long id;
+
+    protected boolean isNew() {
+        return id == null;
+    }
 
     @Override
     public boolean equals(Object o) {

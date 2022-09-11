@@ -5,14 +5,11 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.trainithard.pollerbot.service.SessionService;
 import ru.trainithard.pollerbot.service.UserService;
 import ru.trainithard.pollerbot.service.dto.UpdateUserSession;
-import ru.trainithard.pollerbot.util.TextButtonMessageConstructor;
-import ru.trainithard.pollerbot.util.TextMessageConstructor;
+import ru.trainithard.pollerbot.util.MessageConstructor;
 
 public abstract class AbstractCommand implements Command {
     @Autowired
-    protected TextMessageConstructor textMessageConstructor;
-    @Autowired
-    protected TextButtonMessageConstructor textButtonMessageConstructor;
+    protected MessageConstructor messageConstructor;
     @Autowired
     protected UserService userService;
     @Autowired

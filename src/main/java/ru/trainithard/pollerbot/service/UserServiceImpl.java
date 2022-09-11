@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User get(Long userId) {
         return repository.get(userId)
-                .orElse(new User(Role.NEW));
+                .orElse(new User(userId, Role.NEW));
     }
 
     @Override

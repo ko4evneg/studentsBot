@@ -1,14 +1,11 @@
 package ru.trainithard.pollerbot.service.validator;
 
 import org.springframework.stereotype.Component;
-import ru.trainithard.pollerbot.exception.NamesValidationException;
 
 @Component
 public class UserNamesValidator {
-    public void validate(String lastFirstName) {
-        if (lastFirstName.isBlank() || !stringContainsBothNames(lastFirstName)) {
-            throw new NamesValidationException("Names can't pass validation.");
-        }
+    public boolean validate(String lastFirstName) {
+        return !lastFirstName.isBlank() && stringContainsBothNames(lastFirstName);
     }
 
     private boolean stringContainsBothNames(String lastFirstName) {

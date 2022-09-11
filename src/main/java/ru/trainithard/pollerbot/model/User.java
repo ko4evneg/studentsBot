@@ -13,7 +13,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name = "users")
 public class User extends BaseEntity {
-    public User(Role role) {
+    public User(Long userId, Role role) {
+        this.id = userId;
         this.role = role;
     }
 
@@ -22,9 +23,6 @@ public class User extends BaseEntity {
 
     @Column(name = "lastName")
     private String lastName;
-
-    @Column(name = "nick")
-    private String nick;
 
     @Column(name = "email")
     private String email;
@@ -39,11 +37,11 @@ public class User extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(nick, user.nick) && Objects.equals(email, user.email) && role == user.role;
+        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, nick, email, role);
+        return Objects.hash(super.hashCode(), firstName, lastName, email, role);
     }
 }

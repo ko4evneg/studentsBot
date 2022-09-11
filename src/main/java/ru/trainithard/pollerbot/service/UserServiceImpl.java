@@ -13,16 +13,19 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
+    @Override
     public User get(Long userId) {
         return repository.get(userId)
                 .orElse(new User(Role.NEW));
     }
 
+    @Override
     public List<User> getAll() {
         return repository.getAll()
                 .stream().toList();
     }
 
+    @Override
     public User save(User user) {
         return repository.save(user);
     }

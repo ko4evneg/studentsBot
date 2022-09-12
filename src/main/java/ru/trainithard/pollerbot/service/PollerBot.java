@@ -1,6 +1,7 @@
 package ru.trainithard.pollerbot.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -11,9 +12,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class PollerBot extends TelegramLongPollingBot {
     private final UpdateProcessingManager manager;
 
+    @Value(value = "#{environment.botToken}")
+    private String token;
+    @Value(value = "#{environment.botUsername}")
+    private String username;
+
     @Override
     public String getBotToken() {
-        return System.getenv("bot_token");
+        return token;
     }
 
     @Override
@@ -28,6 +34,6 @@ public class PollerBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return System.getenv("bot_username");
+        return username;
     }
 }

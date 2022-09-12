@@ -13,19 +13,23 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name = "users")
 public class User extends BaseEntity {
-    public User(Long userId, Role role) {
+    public User(Long userId, Role role, Long chatId) {
         this.id = userId;
         this.role = role;
+        this.chatId = chatId;
     }
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "chat_id")
+    private Long chatId;
 
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)

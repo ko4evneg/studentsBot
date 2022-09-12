@@ -1,7 +1,6 @@
 package ru.trainithard.pollerbot.service.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.trainithard.pollerbot.service.SessionService;
 import ru.trainithard.pollerbot.service.UserService;
 import ru.trainithard.pollerbot.service.dto.UpdateUserSession;
@@ -14,25 +13,6 @@ public abstract class AbstractCommand implements Command {
     protected UserService userService;
     @Autowired
     protected SessionService sessionService;
-
-    protected Long getChatId(UpdateUserSession updateUserSession) {
-        Update update = updateUserSession.getUpdate();
-        if (update.hasMessage()) {
-            return update.getMessage().getChatId();
-        }
-
-        return update.getCallbackQuery().getMessage().getChatId();
-
-        //todo polls
-    }
-
-    protected String getMessage(UpdateUserSession updateUserSession) {
-        Update update = updateUserSession.getUpdate();
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            return update.getMessage().getText();
-        }
-        return "";
-    }
 
     protected void saveSession(UpdateUserSession updateUserSession) {
         sessionService.save(updateUserSession.getUser(), updateUserSession.getSession());

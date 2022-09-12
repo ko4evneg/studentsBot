@@ -11,7 +11,7 @@ public class NewUserStartRegistrationCommand extends AbstractCommand {
         updateUserSession.getSession().stepForward();
         saveSession(updateUserSession);
 
-        return messageConstructor.construct(getChatId(updateUserSession), "Введите ваши данные в формате: Имя Фамилия");
+        return messageConstructor.construct(updateUserSession.getChatId(), "Введите ваши данные в формате: Имя Фамилия");
     }
 
     @Override

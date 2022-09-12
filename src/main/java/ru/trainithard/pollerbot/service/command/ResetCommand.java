@@ -12,7 +12,7 @@ public class ResetCommand extends AbstractCommand {
     public SendMessage execute(UpdateUserSession updateUserSession) {
         updateUserSession.getSession().resetSession();
         saveSession(updateUserSession);
-        return messageConstructor.construct(getChatId(updateUserSession), "Сессия сброшена!");
+        return messageConstructor.construct(updateUserSession.getChatId(), "Сессия сброшена!");
     }
 
     @Override

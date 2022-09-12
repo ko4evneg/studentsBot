@@ -15,7 +15,7 @@ public class RegularUserGetDataCommand extends AbstractCommand {
     public SendMessage execute(UpdateUserSession updateUserSession) {
         List<Button> lineOne = List.of(new Button("В меню", CommandName.USER_GET_MENU));
 
-        return messageConstructor.constructTextButtons(getChatId(updateUserSession), getUserData(updateUserSession), List.of(lineOne));
+        return messageConstructor.constructTextButtons(updateUserSession.getChatId(), getUserData(updateUserSession), List.of(lineOne));
     }
 
     private String getUserData(UpdateUserSession updateUserSession) {

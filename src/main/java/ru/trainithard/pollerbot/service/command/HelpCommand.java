@@ -10,7 +10,7 @@ import ru.trainithard.pollerbot.service.dto.UpdateUserSession;
 public class HelpCommand extends AbstractCommand {
     @Override
     public SendMessage execute(UpdateUserSession updateUserSession) {
-        return messageConstructor.construct(getChatId(updateUserSession), "Помощь: \r\n" +
+        return messageConstructor.construct(updateUserSession.getChatId(), "Помощь: \r\n" +
                 "/reset - сброс сессии");
     }
 

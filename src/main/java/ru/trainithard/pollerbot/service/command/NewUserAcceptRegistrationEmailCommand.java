@@ -19,21 +19,21 @@ public class NewUserAcceptRegistrationEmailCommand extends AbstractCommand {
 
     @Override
     public SendMessage execute(UpdateUserSession updateUserSession) {
-        if (validator.validate(getMessage(updateUserSession))) {
+        if (validator.validate(updateUserSession.getMessage())) {
             saveUserEmailRole(updateUserSession, Role.USER);
 
             updateUserSession.setSession(new RegularUserSession());
             saveSession(updateUserSession);
 
             List<MessageConstructor.Button> lineOne = List.of(new MessageConstructor.Button("В меню", CommandName.USER_GET_MENU));
-            return messageConstructor.constructTextButtons(getChatId(updateUserSession), "Успешная регистрация!", List.of(lineOne));
+            return messageConstructor.constructTextButtons(updateUserSession.getChatId(), "Успешная регистрация!", List.of(lineOne));
         }
-        return messageConstructor.construct(getChatId(updateUserSession), "Введен некорректный email, попробуйте ввести еще раз:");
+        return messageConstructor.construct(updateUserSession.getChatId(), "Введен некорректный email, попробуйте ввести еще раз:");
     }
 
     private void saveUserEmailRole(UpdateUserSession updateUserSession, Role role) {
         User user = updateUserSession.getUser();
-        user.setEmail(getMessage(updateUserSession));
+        user.setEmail(updateUserSession.getMessage());
         user.setRole(role);
         userService.save(updateUserSession.getUser());
     }

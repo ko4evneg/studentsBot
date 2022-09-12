@@ -18,4 +18,15 @@ public class UpdateUserSession {
     private Update update;
     private User user;
     private Session session;
+
+    public Long getChatId() {
+        return user.getChatId();
+    }
+
+    public String getMessage() {
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            return update.getMessage().getText();
+        }
+        return "";
+    }
 }

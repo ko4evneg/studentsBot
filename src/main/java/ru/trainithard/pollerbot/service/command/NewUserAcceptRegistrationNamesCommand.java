@@ -15,21 +15,21 @@ public class NewUserAcceptRegistrationNamesCommand extends AbstractCommand {
 
     @Override
     public SendMessage execute(UpdateUserSession updateUserSession) {
-        if (validator.validate(getMessage(updateUserSession))) {
+        if (validator.validate(updateUserSession.getMessage())) {
             saveUserNames(updateUserSession);
 
             updateUserSession.getSession().stepForward();
             saveSession(updateUserSession);
 
-            return messageConstructor.construct(getChatId(updateUserSession), "Введите email для связи:");
+            return messageConstructor.construct(updateUserSession.getChatId(), "Введите email для связи:");
         }
-        return messageConstructor.construct(getChatId(updateUserSession), "Введены некорректные данные, попробуйте ввести еще раз:");
+        return messageConstructor.construct(updateUserSession.getChatId(), "Введены некорректные данные, попробуйте ввести еще раз:");
     }
 
     private void saveUserNames(UpdateUserSession updateUserSession) {
         User user = updateUserSession.getUser();
-        String firstName = getMessage(updateUserSession).split("\\s")[0];
-        String lastName = getMessage(updateUserSession).split("\\s")[0];
+        String firstName = updateUserSession.getMessage().split("\\s")[0];
+        String lastName = updateUserSession.getMessage().split("\\s")[0];
 
         user.setFirstName(firstName);
         user.setLastName(lastName);

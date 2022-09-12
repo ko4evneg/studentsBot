@@ -14,7 +14,7 @@ public class NewUserInitSessionCommand extends AbstractCommand {
     public SendMessage execute(UpdateUserSession updateUserSession) {
         List<Button> lineOne = List.of(new Button("Начать регистрацию", CommandName.NEW_USER_START_REGISTRATION));
 
-        return messageConstructor.constructTextButtons(getChatId(updateUserSession),
+        return messageConstructor.constructTextButtons(updateUserSession.getChatId(),
                 "Вас приветствует TrainItHard бот. Для использования требуется регистрация:", List.of(lineOne));
     }
 

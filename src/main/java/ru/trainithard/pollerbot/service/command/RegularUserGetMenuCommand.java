@@ -14,7 +14,7 @@ public class RegularUserGetMenuCommand extends AbstractCommand {
     public SendMessage execute(UpdateUserSession updateUserSession) {
         List<Button> buttons = List.of(new Button("Мои данные", CommandName.USER_GET_DATA),
                 new Button("Уроки", CommandName.USER_GET_LESSONS));
-        return messageConstructor.constructTextButtons(getChatId(updateUserSession), "Главное меню:", List.of(buttons));
+        return messageConstructor.constructTextButtons(updateUserSession.getChatId(), "Главное меню:", List.of(buttons));
     }
 
     @Override

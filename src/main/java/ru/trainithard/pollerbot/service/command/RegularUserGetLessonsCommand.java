@@ -14,7 +14,7 @@ public class RegularUserGetLessonsCommand extends AbstractCommand {
     public SendMessage execute(UpdateUserSession updateUserSession) {
         List<Button> lineOne = List.of(new Button("В меню", CommandName.USER_GET_MENU));
 
-        return messageConstructor.constructTextButtons(getChatId(updateUserSession), "Уроки:", List.of(lineOne));
+        return messageConstructor.constructTextButtons(updateUserSession.getChatId(), "Уроки:", List.of(lineOne));
     }
 
     @Override

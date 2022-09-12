@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Long> getAllChatIds(){
+        return repository.getAllChatIds();
+    }
+
+    @Override
     public User save(User user) {
         return repository.save(user);
     }

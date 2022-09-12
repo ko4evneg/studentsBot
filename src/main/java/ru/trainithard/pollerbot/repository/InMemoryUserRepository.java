@@ -3,10 +3,7 @@ package ru.trainithard.pollerbot.repository;
 import org.springframework.stereotype.Component;
 import ru.trainithard.pollerbot.model.User;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public class InMemoryUserRepository implements UserRepository {
@@ -25,5 +22,12 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public User save(User user) {
         return users.put(user.getId(), user);
+    }
+
+    @Override
+    public List<Long> getAllChatIds() {
+        return users.values().stream()
+                .map(User::getChatId)
+                .toList();
     }
 }

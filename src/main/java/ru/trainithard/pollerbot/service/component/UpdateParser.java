@@ -25,23 +25,4 @@ public class UpdateParser {
         throw new PollerBotException("Can't extract user from update!");
     }
 
-    public boolean hasCommand(Update update) {
-        return getCommandName(update) != CommandName.NO_COMMAND;
-    }
-
-    public CommandName getCommandName(Update update) {
-        if (update.hasCallbackQuery()) {
-            String message = update.getCallbackQuery().getData();
-            return CommandName.getByHumanName(message);
-        }
-
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            String message = update.getMessage().getText().trim();
-            if (message.startsWith(COMMAND_PREFIX)) {
-                return CommandName.getByHumanName(message.substring(1));
-            }
-        }
-
-        return CommandName.NO_COMMAND;
-    }
 }

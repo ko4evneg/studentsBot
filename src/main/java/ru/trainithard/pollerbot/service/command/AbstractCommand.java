@@ -17,4 +17,5 @@ public abstract class AbstractCommand implements Command {
     protected void saveSession(UpdateUserSession updateUserSession) {
         sessionService.save(updateUserSession.getUser(), updateUserSession.getSession());
     }
+
 }

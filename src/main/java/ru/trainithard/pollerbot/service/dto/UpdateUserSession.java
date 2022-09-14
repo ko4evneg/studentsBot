@@ -23,10 +23,19 @@ public class UpdateUserSession {
         return user.getChatId();
     }
 
+    public boolean hasMessage() {
+        return update.hasMessage() && update.getMessage().hasText();
+    }
+
     public String getMessage() {
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            return update.getMessage().getText();
-        }
-        return "";
+        return update.getMessage().getText();
+    }
+
+    public boolean hasCallback() {
+        return update.hasCallbackQuery();
+    }
+
+    public String getCallbackData() {
+        return update.getCallbackQuery().getData();
     }
 }

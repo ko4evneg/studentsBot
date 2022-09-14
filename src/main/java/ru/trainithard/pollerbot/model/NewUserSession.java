@@ -1,20 +1,17 @@
 package ru.trainithard.pollerbot.model;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
-import static ru.trainithard.pollerbot.service.command.CommandName.*;
+import javax.annotation.PostConstruct;
 
 @Component
+@Scope(value = "prototype")
 public class NewUserSession extends AbstractSession {
-    public NewUserSession() {
+    @PostConstruct
+    public void init() {
         newSession = true;
         commandIndex = 0;
-        commandNames.addAll(List.of(
-                NEW_USER_INIT_COMMAND,
-                NEW_USER_ACCEPT_REGISTRATION_NAMES,
-                NEW_USER_ACCEPT_REGISTRATION_EMAILS
-        ));
+        commands.addAll(sessionCommands.get(this.getClass().getSimpleName()));
     }
 }

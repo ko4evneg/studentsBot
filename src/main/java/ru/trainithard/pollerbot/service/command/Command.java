@@ -6,5 +6,9 @@ import ru.trainithard.pollerbot.service.dto.UpdateUserSession;
 public interface Command {
     SendMessage execute(UpdateUserSession updateUserSession);
 
-    CommandName getCommandName();
+    String getCommandName();
+
+    String getSessionClassName();
+
+    int getStepNumber();
 }

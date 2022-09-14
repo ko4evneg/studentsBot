@@ -13,8 +13,19 @@ public abstract class AbstractCommand implements Command {
     protected UserService userService;
     @Autowired
     protected SessionService sessionService;
+    protected int stepNumber;
 
     protected void saveSession(UpdateUserSession updateUserSession) {
         sessionService.save(updateUserSession.getUser(), updateUserSession.getSession());
+    }
+
+    @Override
+    public String getSessionClassName() {
+        return "";
+    }
+
+    @Override
+    public int getStepNumber() {
+        return stepNumber;
     }
 }

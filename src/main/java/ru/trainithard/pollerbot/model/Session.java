@@ -1,12 +1,12 @@
 package ru.trainithard.pollerbot.model;
 
-import ru.trainithard.pollerbot.service.command.CommandName;
+import ru.trainithard.pollerbot.service.command.Command;
 
 
 public interface Session {
     void stepForward();
 
-    CommandName getCurrentCommandName();
+    Command getCurrentCommandName();
 
     void resetSession();
 }

@@ -7,8 +7,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.trainithard.pollerbot.model.Role;
 import ru.trainithard.pollerbot.model.Session;
 import ru.trainithard.pollerbot.model.User;
-import ru.trainithard.pollerbot.service.command.Command;
-import ru.trainithard.pollerbot.service.command.CommandName;
 import ru.trainithard.pollerbot.service.component.CommandFinder;
 import ru.trainithard.pollerbot.service.component.UpdateParser;
 import ru.trainithard.pollerbot.service.dto.UpdateUserSession;
@@ -24,15 +22,12 @@ public class UpdateProcessingManager {
     public SendMessage process(Update update) {
         UpdateUserSession updateUserSession = getUpdateUserSession(update);
 
-        if (!updateParser.hasCommand(update)) {
+        if (!commandFinder.hasCommand(update)) {
             Session currentSession = updateUserSession.getSession();
-            CommandName currentCommandName = currentSession.getCurrentCommandName();
-            return commandFinder.find(currentCommandName).execute(updateUserSession);
+            return currentSession.getCurrentCommandName().execute(updateUserSession);
         }
 
-        CommandName commandName = updateParser.getCommandName(update);
-        Command command = commandFinder.find(commandName);
-        return command.execute(updateUserSession);
+        return commandFinder.find(update).execute(updateUserSession);
     }
 
     private UpdateUserSession getUpdateUserSession(Update update) {

@@ -16,7 +16,7 @@ public class ResetCommand extends AbstractCommand {
     }
 
     @Override
-    public CommandName getCommandName() {
-        return CommandName.RESET_COMMAND;
+    public String getCommandName() {
+        return "reset";
     }
 }

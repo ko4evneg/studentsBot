@@ -13,7 +13,7 @@ public class NoCommand extends AbstractCommand {
     }
 
     @Override
-    public CommandName getCommandName() {
-        return CommandName.NO_COMMAND;
+    public String getCommandName() {
+        return "NO_COMMAND";
     }
 }

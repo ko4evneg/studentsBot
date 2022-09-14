@@ -3,6 +3,7 @@ package ru.trainithard.pollerbot.service.command;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import ru.trainithard.pollerbot.model.NewUserSession;
 import ru.trainithard.pollerbot.model.RegularUserSession;
 import ru.trainithard.pollerbot.model.Role;
 import ru.trainithard.pollerbot.model.User;
@@ -16,6 +17,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NewUserAcceptRegistrationEmailCommand extends AbstractCommand {
     private final EmailValidator validator;
+
+    {
+        stepNumber = 4;
+    }
 
     @Override
     public SendMessage execute(UpdateUserSession updateUserSession) {
@@ -39,7 +44,12 @@ public class NewUserAcceptRegistrationEmailCommand extends AbstractCommand {
     }
 
     @Override
-    public CommandName getCommandName() {
-        return CommandName.NEW_USER_ACCEPT_REGISTRATION_EMAILS;
+    public String getCommandName() {
+        return "NEW_USER_ACCEPT_REGISTRATION_EMAILS";
+    }
+
+    @Override
+    public String getSessionClassName() {
+        return NewUserSession.class.getSimpleName();
     }
 }

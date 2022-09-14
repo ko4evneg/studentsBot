@@ -2,6 +2,7 @@ package ru.trainithard.pollerbot.service.command;
 
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import ru.trainithard.pollerbot.model.RegularUserSession;
 import ru.trainithard.pollerbot.service.dto.UpdateUserSession;
 
 import java.util.List;
@@ -18,7 +19,12 @@ public class RegularUserGetLessonsCommand extends AbstractCommand {
     }
 
     @Override
-    public CommandName getCommandName() {
-        return CommandName.USER_GET_LESSONS;
+    public String getCommandName() {
+        return "USER_GET_LESSONS";
+    }
+
+    @Override
+    public String getSessionClassName() {
+        return RegularUserSession.class.getSimpleName();
     }
 }

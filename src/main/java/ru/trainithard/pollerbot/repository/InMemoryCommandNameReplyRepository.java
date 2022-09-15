@@ -23,24 +23,23 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
         //new user texts
         putButtonedReply(NO_COMMAND, getArrayOf("Вас приветствует TrainItHard бот. Для использования требуется регистрация: ",
                 "Хотите начать регистрацию?"), List.of(List.of(new Button("Начать регистрацию", REGISTER_NAMES))));
-
         replies.put(REGISTER_NAMES, getArrayOf("Для регистрации укажите Имя и Фамилию (в таком же порядке): ",
                 "Неверные Имя Фамилия, попробуйте еще раз:"));
-
         replies.put(REGISTER_EMAIL, getArrayOf("Укажите email для связи: ", "Неверный email, попробуйте еще раз:"));
-
         putButtonedReply(FINISH_REGISTRATION, getArrayOf("Успешная регистрация!", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
 
         //regular user texts
         putButtonedReply(USER_GET_MENU, getArrayOf("МЕНЮ", ""),
                 List.of(List.of(new Button("Мои данные", USER_GET_DATA), new Button("Уроки", USER_GET_LESSONS))));
-
         putButtonedReply(USER_GET_DATA, getArrayOf("Ваши данные", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
-
         putButtonedReply(USER_GET_LESSONS, getArrayOf("Список уроков", ""),
                 List.of(List.of(new Button("STUB_LES", USER_GET_MENU)), List.of(new Button("В меню", USER_GET_MENU))));
+
+        //text commands
+        replies.put(RESET_SESSION, getArrayOf("Сессия успешно сброшена", ""));
+        replies.put(HELP, getArrayOf("Помощь:\r\n /reset - сброс сессии пользователя", ""));
     }
 
     private void putButtonedReply(CommandName commandName, String[] replyTexts, List<List<Button>> keyboard) {

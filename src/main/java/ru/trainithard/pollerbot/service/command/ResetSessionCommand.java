@@ -5,15 +5,20 @@ import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMess
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 
 @Component
-public class HelpCommand extends AbstractCommand {
+public class ResetSessionCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        saveUserSession(shiftSessionToThisCommand(userMessage));
+        getSession(userMessage).setPreviousCommandName(getStartSessionCommand(userMessage));
+        getSession(userMessage).setNextCommandName(getStartSessionCommand(userMessage));
         return getTextMessage(userMessage);
+    }
+
+    private CommandName getStartSessionCommand(UserMessage userMessage) {
+        return getUser(userMessage).getRole().getStartCommand();
     }
 
     @Override
     public CommandName getCommandName() {
-        return CommandName.HELP;
+        return CommandName.RESET_SESSION;
     }
 }

@@ -19,7 +19,7 @@ public class CallbackMessageHandler extends MessageHandler {
     }
 
     private CommandName getInvokedCommandName(UserMessage userMessage) {
-        return CommandName.getByName(userMessage.getCallbackData());
+        return CommandName.getByName(userMessage.getCallbackData()).get();
     }
 
     private UserMessage createUserMessage(Update update) {

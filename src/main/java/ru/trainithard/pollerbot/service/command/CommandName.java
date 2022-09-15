@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor
@@ -27,10 +28,9 @@ public enum CommandName {
 
     private String name;
 
-    public static CommandName getByName(String name) {
+    public static Optional<CommandName> getByName(String name) {
         return Arrays.stream(values())
                 .filter(commandName -> name.equals(commandName.getName()) || name.equals(commandName.toString()))
-                .findFirst()
-                .orElse(NO_COMMAND);
+                .findFirst();
     }
 }

@@ -10,6 +10,8 @@ import static ru.trainithard.pollerbot.service.command.CommandName.FINISH_UPLOAD
 public class FinishUploadHomeworkCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
+        getSession(userMessage).setPreviousCommandName(FINISH_UPLOAD_HOMEWORK);
+        saveUserSession(userMessage);
         return getTextButtonMessage(userMessage);
     }
 

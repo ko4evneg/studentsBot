@@ -18,19 +18,23 @@ public class MessageConstructor {
                 .build();
     }
 
-    public SendMessage constructError(Long chatId, PollerBotException exception) {
-        return construct(chatId, exception.getMessage());
+    public SendMessage constructText(Long chatId, String text) {
+        return SendMessage.builder()
+                .text(text)
+                .chatId(chatId)
+                .build();
     }
 
     public SendMessage constructTextButtons(Long chatId, String text, List<List<Button>> buttons) {
-        InlineKeyboardMarkup keyboard = createKeyboard(buttons);
         SendMessage reply = construct(chatId, text);
-        reply.setReplyMarkup(keyboard);
+        reply.setReplyMarkup(createKeyboard(buttons));
         return reply;
     }
 
     private InlineKeyboardMarkup createKeyboard(List<List<Button>> buttons) {
-        List<List<InlineKeyboardButton>> buttonLines = buttons.stream().map(this::createButtonsRow).toList();
+        List<List<InlineKeyboardButton>> buttonLines = buttons.stream()
+                .map(this::createButtonsRow)
+                .toList();
         return InlineKeyboardMarkup.builder()
                 .keyboard(buttonLines)
                 .build();
@@ -45,6 +49,10 @@ public class MessageConstructor {
                 .text(button.text())
                 .callbackData(button.commandName().toString())
                 .build();
+    }
+
+    public SendMessage constructError(Long chatId, PollerBotException exception) {
+        return construct(chatId, exception.getMessage());
     }
 
     public record Button(String text, CommandName commandName) {

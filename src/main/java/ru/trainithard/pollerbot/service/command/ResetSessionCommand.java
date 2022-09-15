@@ -8,13 +8,9 @@ import ru.trainithard.pollerbot.service.dto.UserMessage;
 public class ResetSessionCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        getSession(userMessage).setPreviousCommandName(getStartSessionCommand(userMessage));
-        getSession(userMessage).setNextCommandName(getStartSessionCommand(userMessage));
+        getSession(userMessage).reset();
+        saveUserSession(userMessage);
         return getTextMessage(userMessage);
-    }
-
-    private CommandName getStartSessionCommand(UserMessage userMessage) {
-        return getUser(userMessage).getRole().getStartCommand();
     }
 
     @Override

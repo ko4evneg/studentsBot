@@ -15,6 +15,11 @@ public class Session{
         this.role = role;
     }
 
+    public void reset() {
+        setPreviousCommandName(getRole().getStartCommand());
+        setNextCommandName(getRole().getStartCommand());
+    }
+
     public CommandName getNextCommandName() {
         return nextCommandName == null ? getRole().getStartCommand() : nextCommandName;
     }

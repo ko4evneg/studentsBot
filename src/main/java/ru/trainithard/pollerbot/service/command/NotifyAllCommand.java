@@ -13,8 +13,8 @@ import static ru.trainithard.pollerbot.service.command.CommandName.NOTIFY_ALL;
 
 @Component
 public class NotifyAllCommand extends AbstractCommand {
-    @Autowired
     @Lazy
+    @Autowired
     private NotificationService notificationService;
 
     @Override

@@ -11,5 +11,5 @@ public interface UserService {
 
     List<Long> getAllChatIds();
 
-    User save(User user);
+    void save(User user);
 }

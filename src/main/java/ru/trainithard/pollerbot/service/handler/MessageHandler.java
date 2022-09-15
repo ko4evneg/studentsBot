@@ -33,5 +33,5 @@ public abstract class MessageHandler {
                 .user(user)
                 .session(sessionService.get(user))
                 .build();
-    };
+    }
 }

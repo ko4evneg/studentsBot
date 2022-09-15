@@ -13,7 +13,7 @@ import java.util.Map;
 public class HandlerFinder {
     private final Map<String, MessageHandler> handler;
 
-    public MessageHandler find(Update update) throws ReflectiveOperationException {
+    public MessageHandler find(Update update) {
         if (update.hasPollAnswer()) {
             return handler.get("pollMessageHandler");
         }

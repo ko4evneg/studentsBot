@@ -5,7 +5,7 @@ import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMess
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import ru.trainithard.pollerbot.model.Session;
 import ru.trainithard.pollerbot.model.User;
-import ru.trainithard.pollerbot.repository.CommandNameTextsRepository;
+import ru.trainithard.pollerbot.repository.CommandNameReplyRepository;
 import ru.trainithard.pollerbot.service.SessionService;
 import ru.trainithard.pollerbot.service.UserService;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
@@ -21,7 +21,7 @@ public abstract class AbstractCommand {
     @Autowired
     protected SessionService sessionService;
     @Autowired
-    protected CommandNameTextsRepository commandNameTextsRepository;
+    protected CommandNameReplyRepository commandNameReplyRepository;
 
     /**
      * Executes command based on UserMessage data.
@@ -53,16 +53,16 @@ public abstract class AbstractCommand {
     }
 
     protected SendMessage getTextMessage(UserMessage userMessage) {
-        return messageConstructor.constructText(userMessage.getChatId(), commandNameTextsRepository.getText(getCommandName()));
+        return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.getText(getCommandName()));
     }
 
-    protected SendMessage getTextButtonMessage(UserMessage userMessage, List<List<MessageConstructor.Button>> buttons) {
+    protected SendMessage getTextButtonMessage(UserMessage userMessage) {
         return messageConstructor.constructTextButtons(userMessage.getChatId(),
-                commandNameTextsRepository.getText(getCommandName()), buttons);
+                commandNameReplyRepository.getText(getCommandName()), commandNameReplyRepository.getButtons(getCommandName()));
     }
 
     protected SendMessage getErrorMessage(UserMessage userMessage) {
-        return messageConstructor.constructText(userMessage.getChatId(), commandNameTextsRepository.getErrorText(getCommandName()));
+        return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.getErrorText(getCommandName()));
     }
 
     protected User getUser(UserMessage userMessage) {

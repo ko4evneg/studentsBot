@@ -18,12 +18,9 @@ public class FinishRegistrationCommand extends AbstractCommand {
         userMessage.setSession(sessionService.get(userMessage.getUser()));
         saveUserSession(userMessage);
 
-        return getTextButtonMessage(userMessage, getMessageButtons());
+        return getTextButtonMessage(userMessage);
     }
 
-    private List<List<MessageConstructor.Button>> getMessageButtons() {
-        return List.of(List.of(new MessageConstructor.Button("В меню", USER_GET_MENU)));
-    }
 
     @Override
     public CommandName getCommandName() {

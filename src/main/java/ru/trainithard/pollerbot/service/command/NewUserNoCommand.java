@@ -14,11 +14,7 @@ import static ru.trainithard.pollerbot.util.MessageConstructor.Button;
 public class NewUserNoCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        return getTextButtonMessage(userMessage, getMessageButtons());
-    }
-
-    private List<List<Button>> getMessageButtons() {
-        return List.of(List.of(new Button("Начать регистрацию", REGISTER_NAMES)));
+        return getTextButtonMessage(userMessage);
     }
 
     @Override

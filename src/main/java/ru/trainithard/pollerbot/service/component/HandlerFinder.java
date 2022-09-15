@@ -13,7 +13,7 @@ import java.util.Map;
 public class HandlerFinder {
     private final Map<String, MessageHandler> handler;
 
-    public MessageHandler process(Update update) throws ReflectiveOperationException {
+    public MessageHandler find(Update update) throws ReflectiveOperationException {
         if (update.hasPollAnswer()) {
             return handler.get("pollMessageHandler");
         }
@@ -22,6 +22,9 @@ public class HandlerFinder {
         }
         if (update.hasMessage() && update.getMessage().hasText()) {
             return handler.get("textMessageHandler");
+        }
+        if (update.hasMessage() && update.getMessage().hasDocument()) {
+            return handler.get("documentMessageHandler");
         }
 
         throw new PollerBotException("Unknown message type");

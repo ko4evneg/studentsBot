@@ -6,7 +6,6 @@ import ru.trainithard.pollerbot.model.User;
 import ru.trainithard.pollerbot.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,9 +13,9 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
     @Override
-    public Optional<User> get(Long userId) {
-        return repository.get(userId);
-
+    public User get(Long userId) {
+        return repository.get(userId)
+                .orElse(new User(userId));
     }
 
     @Override

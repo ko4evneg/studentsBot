@@ -25,9 +25,19 @@ public class RegisterNamesCommand extends AbstractCommand {
             return getErrorMessage(userMessage);
         } else {
             getSession(userMessage).setNextCommandName(CommandName.REGISTER_EMAIL);
+            getUser(userMessage).setFirstName(getFirstName(userMessage));
+            getUser(userMessage).setLastName(getLastName(userMessage));
             saveUserSession(userMessage);
             return registerEmailCommand.execute(userMessage);
         }
+    }
+
+    private String getFirstName(UserMessage userMessage) {
+        return (userMessage.getMessage().split("\\s"))[0];
+    }
+
+    private String getLastName(UserMessage userMessage) {
+        return (userMessage.getMessage().split("\\s"))[1];
     }
 
     @Override

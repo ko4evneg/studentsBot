@@ -20,6 +20,7 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
 
     @PostConstruct
     public void fill() {
+        //new user texts
         putButtonedReply(NO_COMMAND, getArrayOf("Вас приветствует TrainItHard бот. Для использования требуется регистрация: ",
                 "Хотите начать регистрацию?"), List.of(List.of(new Button("Начать регистрацию", REGISTER_NAMES))));
 
@@ -31,8 +32,15 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
         putButtonedReply(FINISH_REGISTRATION, getArrayOf("Успешная регистрация!", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
 
+        //regular user texts
         putButtonedReply(USER_GET_MENU, getArrayOf("МЕНЮ", ""),
                 List.of(List.of(new Button("Мои данные", USER_GET_DATA), new Button("Уроки", USER_GET_LESSONS))));
+
+        putButtonedReply(USER_GET_DATA, getArrayOf("Ваши данные", ""),
+                List.of(List.of(new Button("В меню", USER_GET_MENU))));
+
+        putButtonedReply(USER_GET_LESSONS, getArrayOf("Список уроков", ""),
+                List.of(List.of(new Button("STUB_LES", USER_GET_MENU)), List.of(new Button("В меню", USER_GET_MENU))));
     }
 
     private void putButtonedReply(CommandName commandName, String[] replyTexts, List<List<Button>> keyboard) {

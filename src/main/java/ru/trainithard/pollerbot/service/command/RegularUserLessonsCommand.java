@@ -4,10 +4,10 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 
-import static ru.trainithard.pollerbot.service.command.CommandName.USER_GET_MENU;
+import static ru.trainithard.pollerbot.service.command.CommandName.USER_GET_LESSONS;
 
 @Component
-public class RegularUserMenuCommand extends AbstractCommand {
+public class RegularUserLessonsCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         return getTextButtonMessage(userMessage);
@@ -15,6 +15,6 @@ public class RegularUserMenuCommand extends AbstractCommand {
 
     @Override
     public CommandName getCommandName() {
-        return USER_GET_MENU;
+        return USER_GET_LESSONS;
     }
 }

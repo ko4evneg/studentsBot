@@ -61,6 +61,11 @@ public abstract class AbstractCommand {
                 commandNameReplyRepository.getText(getCommandName()), commandNameReplyRepository.getButtons(getCommandName()));
     }
 
+    protected SendMessage getCustomTextButtonMessage(UserMessage userMessage, String text) {
+        return messageConstructor.constructTextButtons(userMessage.getChatId(), text,
+                commandNameReplyRepository.getButtons(getCommandName()));
+    }
+
     protected SendMessage getErrorMessage(UserMessage userMessage) {
         return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.getErrorText(getCommandName()));
     }

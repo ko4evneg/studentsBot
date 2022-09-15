@@ -14,8 +14,7 @@ import static ru.trainithard.pollerbot.util.MessageConstructor.Button;
 public class NewUserNoCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        return messageConstructor.constructTextButtons(userMessage.getChatId(),
-                commandNameTextsRepository.getText(NO_COMMAND), getMessageButtons());
+        return getTextButtonMessage(userMessage, getMessageButtons());
     }
 
     private List<List<Button>> getMessageButtons() {

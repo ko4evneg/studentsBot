@@ -11,6 +11,8 @@ import ru.trainithard.pollerbot.service.UserService;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 import ru.trainithard.pollerbot.util.MessageConstructor;
 
+import java.util.List;
+
 public abstract class AbstractCommand {
     @Autowired
     protected MessageConstructor messageConstructor;
@@ -23,6 +25,7 @@ public abstract class AbstractCommand {
 
     /**
      * Executes command based on UserMessage data.
+     *
      * @param userMessage containing Update and User information
      * @return BotApiMethodMessage used for reply after command execution
      */
@@ -30,6 +33,7 @@ public abstract class AbstractCommand {
 
     /**
      * Used for lookup of corresponding command. Should be added to CommandName enum.
+     *
      * @return CommandName
      */
     public abstract CommandName getCommandName();
@@ -50,6 +54,11 @@ public abstract class AbstractCommand {
 
     protected SendMessage getTextMessage(UserMessage userMessage) {
         return messageConstructor.constructText(userMessage.getChatId(), commandNameTextsRepository.getText(getCommandName()));
+    }
+
+    protected SendMessage getTextButtonMessage(UserMessage userMessage, List<List<MessageConstructor.Button>> buttons) {
+        return messageConstructor.constructTextButtons(userMessage.getChatId(),
+                commandNameTextsRepository.getText(getCommandName()), buttons);
     }
 
     protected SendMessage getErrorMessage(UserMessage userMessage) {

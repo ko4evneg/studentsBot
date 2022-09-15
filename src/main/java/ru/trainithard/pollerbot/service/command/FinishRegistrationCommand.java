@@ -18,8 +18,7 @@ public class FinishRegistrationCommand extends AbstractCommand {
         userMessage.setSession(sessionService.get(userMessage.getUser()));
         saveUserSession(userMessage);
 
-        return messageConstructor.constructTextButtons(userMessage.getChatId(),
-                commandNameTextsRepository.getText(FINISH_REGISTRATION), getMessageButtons());
+        return getTextButtonMessage(userMessage, getMessageButtons());
     }
 
     private List<List<MessageConstructor.Button>> getMessageButtons() {

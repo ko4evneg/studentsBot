@@ -2,24 +2,19 @@ package ru.trainithard.pollerbot.service.command;
 
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
-import ru.trainithard.pollerbot.model.Role;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 
-import static ru.trainithard.pollerbot.service.command.CommandName.FINISH_REGISTRATION;
+import static ru.trainithard.pollerbot.service.command.CommandName.ADMIN_GET_MENU;
 
 @Component
-public class FinishRegistrationCommand extends AbstractCommand {
+public class AdminMenuCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        getUser(userMessage).setRole(Role.USER);
-        saveUserSession(userMessage);
-
         return getTextButtonMessage(userMessage);
     }
 
-
     @Override
     public CommandName getCommandName() {
-        return FINISH_REGISTRATION;
+        return ADMIN_GET_MENU;
     }
 }

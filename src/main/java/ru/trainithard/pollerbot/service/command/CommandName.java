@@ -18,9 +18,13 @@ public enum CommandName {
     USER_GET_DATA,
     USER_GET_LESSONS,
 
-    HELP("/help"),
-    RESET_SESSION("/reset");
+    ADMIN_GET_MENU,
+    NOTIFY_ALL,
+    CONSTRUCT_NOTIFICATION,
 
+    HELP("/help"),
+    RESET_SESSION("/reset"),
+    ELEVATE("/elevate");
 
     CommandName(String name) {
         this.name = name;

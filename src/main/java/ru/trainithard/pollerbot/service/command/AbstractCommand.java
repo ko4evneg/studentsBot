@@ -11,8 +11,6 @@ import ru.trainithard.pollerbot.service.UserService;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 import ru.trainithard.pollerbot.util.MessageConstructor;
 
-import java.util.List;
-
 public abstract class AbstractCommand {
     @Autowired
     protected MessageConstructor messageConstructor;
@@ -64,6 +62,10 @@ public abstract class AbstractCommand {
     protected SendMessage getCustomTextButtonMessage(UserMessage userMessage, String text) {
         return messageConstructor.constructTextButtons(userMessage.getChatId(), text,
                 commandNameReplyRepository.getButtons(getCommandName()));
+    }
+
+    protected SendMessage getCustomTextMessage(UserMessage userMessage, String text) {
+        return messageConstructor.constructText(userMessage.getChatId(), text);
     }
 
     protected SendMessage getErrorMessage(UserMessage userMessage) {

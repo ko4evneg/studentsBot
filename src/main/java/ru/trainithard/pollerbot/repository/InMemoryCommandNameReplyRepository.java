@@ -2,6 +2,7 @@ package ru.trainithard.pollerbot.repository;
 
 import org.springframework.stereotype.Component;
 import ru.trainithard.pollerbot.service.command.CommandName;
+import ru.trainithard.pollerbot.util.MessageConstructor;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -19,14 +20,28 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
 
     @PostConstruct
     public void fill() {
-        replies.put(NO_COMMAND, List.of("Вас приветствует TrainItHard бот. Для использования требуется регистрация: ",
-                "Хотите начать регистрацию?").toArray(new String[2]));
-        replies.put(REGISTER_NAMES, List.of("Для регистрации укажите Имя и Фамилию (в таком же порядке): ",
-                "Неверные Имя Фамилия, попробуйте еще раз:").toArray(new String[2]));
-        replies.put(REGISTER_EMAIL, List.of("Укажите email для связи: ",
-                "Неверный email, попробуйте еще раз:").toArray(new String[2]));
-        replies.put(FINISH_REGISTRATION, List.of("Успешная регистрация!", "").toArray(new String[2]));
-        replies.put(USER_GET_MENU, List.of("Меню:", "").toArray(new String[2]));
+        putButtonedReply(NO_COMMAND, getArrayOf("Вас приветствует TrainItHard бот. Для использования требуется регистрация: ",
+                "Хотите начать регистрацию?"), List.of(List.of(new Button("Начать регистрацию", REGISTER_NAMES))));
+
+        replies.put(REGISTER_NAMES, getArrayOf("Для регистрации укажите Имя и Фамилию (в таком же порядке): ",
+                "Неверные Имя Фамилия, попробуйте еще раз:"));
+
+        replies.put(REGISTER_EMAIL, getArrayOf("Укажите email для связи: ", "Неверный email, попробуйте еще раз:"));
+
+        putButtonedReply(FINISH_REGISTRATION, getArrayOf("Успешная регистрация!", ""),
+                List.of(List.of(new Button("В меню", USER_GET_MENU))));
+
+        putButtonedReply(USER_GET_MENU, getArrayOf("МЕНЮ", ""),
+                List.of(List.of(new Button("Мои данные", USER_GET_DATA), new Button("Уроки", USER_GET_LESSONS))));
+    }
+
+    private void putButtonedReply(CommandName commandName, String[] replyTexts, List<List<Button>> keyboard) {
+        replies.put(commandName, replyTexts);
+        buttons.put(commandName, keyboard);
+    }
+
+    private String[] getArrayOf(String... strings) {
+        return strings;
     }
 
     @Override

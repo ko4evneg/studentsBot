@@ -14,6 +14,8 @@ public enum CommandName {
     FINISH_REGISTRATION,
 
     USER_GET_MENU,
+    USER_GET_DATA,
+    USER_GET_LESSONS,
 
     HELP("/help"),
     RESET_SESSION("/reset");

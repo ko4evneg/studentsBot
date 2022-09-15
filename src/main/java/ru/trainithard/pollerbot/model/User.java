@@ -10,15 +10,9 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @Table(name = "users")
+@NoArgsConstructor
 public class User extends BaseEntity {
-    public User(Long userId, Role role, Long chatId) {
-        this.id = userId;
-        this.role = role;
-        this.chatId = chatId;
-    }
-
     @Column(name = "first_name")
     private String firstName;
 
@@ -34,6 +28,11 @@ public class User extends BaseEntity {
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    public User(Long userId) {
+        super(userId);
+        role = Role.NEW;
+    }
 
     @Override
     public boolean equals(Object o) {

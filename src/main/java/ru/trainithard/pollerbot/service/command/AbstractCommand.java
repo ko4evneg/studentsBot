@@ -46,8 +46,8 @@ public abstract class AbstractCommand {
     }
 
     protected void saveUserSession(UserMessage userMessage) {
-        userService.save(userMessage.getUser());
-        sessionService.save(userMessage.getUser(), userMessage.getSession());
+        userService.save(getUser(userMessage));
+        sessionService.save(getUser(userMessage).getId(), userMessage.getSession());
     }
 
     protected void saveUser(UserMessage userMessage) {
@@ -55,7 +55,7 @@ public abstract class AbstractCommand {
     }
 
     protected void saveSession(UserMessage userMessage) {
-        sessionService.save(userMessage.getUser(), userMessage.getSession());
+        sessionService.save(getUser(userMessage).getId(), userMessage.getSession());
     }
 
     protected SendMessage getTextMessage(UserMessage userMessage) {

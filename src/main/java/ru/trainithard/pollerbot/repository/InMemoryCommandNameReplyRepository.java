@@ -35,8 +35,7 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
         putButtonedReply(USER_GET_LESSONS, getArrayOf("Список уроков", ""),
                 List.of(List.of(new Button("STUB_LES", USER_GET_MENU)), List.of(new Button("В меню", USER_GET_MENU))));
-        //todo file naming
-        putTextReply(USER_UPLOAD_HOMEWORK, getArrayOf("Перенесите файл в чат. Не забудьте правильно назвать его.",
+        putTextReply(USER_UPLOAD_HOMEWORK, getArrayOf("Перенесите файл в чат. Файл должен быть .zip или .rar архивом, менее 10МБ.",
                 "Неверное имя файла. Загрузите правильный файл."));
         putButtonedReply(FINISH_UPLOAD_HOMEWORK, getArrayOf("Домашнее задание успешно загружено", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));

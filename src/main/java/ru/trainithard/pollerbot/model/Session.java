@@ -5,7 +5,7 @@ import lombok.Setter;
 import ru.trainithard.pollerbot.service.command.CommandName;
 
 @Setter
-public class Session{
+public class Session {
     protected CommandName previousCommandName;
     protected CommandName nextCommandName;
     @Getter

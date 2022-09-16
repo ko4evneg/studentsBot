@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.trainithard.pollerbot.model.User;
-import ru.trainithard.pollerbot.service.SessionService;
 import ru.trainithard.pollerbot.service.UserService;
 import ru.trainithard.pollerbot.service.command.AbstractCommand;
 import ru.trainithard.pollerbot.service.command.CommandName;
+import ru.trainithard.pollerbot.service.component.SessionFinder;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ public abstract class MessageHandler {
     @Autowired
     protected UserService userService;
     @Autowired
-    protected SessionService sessionService;
+    protected SessionFinder sessionFinder;
     @Autowired
     protected Map<CommandName, AbstractCommand> commands;
 
@@ -31,7 +31,7 @@ public abstract class MessageHandler {
         return UserMessage.builder()
                 .update(update)
                 .user(user)
-                .session(sessionService.get(user))
+                .session(sessionFinder.find(userId))
                 .build();
     }
 }

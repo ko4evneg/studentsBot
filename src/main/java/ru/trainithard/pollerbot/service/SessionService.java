@@ -1,10 +1,11 @@
 package ru.trainithard.pollerbot.service;
 
 import ru.trainithard.pollerbot.model.Session;
-import ru.trainithard.pollerbot.model.User;
+
+import java.util.Optional;
 
 public interface SessionService {
-    Session get(User user);
+    Optional<Session> get(Long userId);
 
-    void save(User user, Session session);
+    void save(Long userId, Session session);
 }

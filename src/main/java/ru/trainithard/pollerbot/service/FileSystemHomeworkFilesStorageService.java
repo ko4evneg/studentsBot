@@ -14,7 +14,7 @@ import java.io.*;
 @Service
 @RequiredArgsConstructor
 public class FileSystemHomeworkFilesStorageService implements HomeworkFilesStorageService {
-    @Value("${homework.directory}")
+    @Value("${pollerbot.homework.directory}")
     private String storageDirectory;
     private final PollerBot pollerBot;
 

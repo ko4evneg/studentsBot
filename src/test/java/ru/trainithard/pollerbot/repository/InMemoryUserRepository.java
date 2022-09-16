@@ -1,11 +1,9 @@
 package ru.trainithard.pollerbot.repository;
 
-import org.springframework.stereotype.Component;
 import ru.trainithard.pollerbot.model.User;
 
 import java.util.*;
 
-@Component
 public class InMemoryUserRepository implements UserRepository {
     private final Map<Long, User> users = new HashMap<>();
 

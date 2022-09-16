@@ -22,7 +22,7 @@ public class UploadHomeworkCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
-            saveUserSession(shiftSessionToThisCommand(userMessage));
+            saveSession(shiftSessionToThisCommand(userMessage));
             return getTextMessage(userMessage);
         }
         if (!validator.validate(userMessage)) {
@@ -30,7 +30,7 @@ public class UploadHomeworkCommand extends AbstractCommand {
         } else {
             storageService.save(getDocument(userMessage));
             getSession(userMessage).setNextCommandName(CommandName.FINISH_UPLOAD_HOMEWORK);
-            saveUserSession(userMessage);
+            saveSession(userMessage);
             return finishUploadHomeworkCommand.execute(userMessage);
         }
     }

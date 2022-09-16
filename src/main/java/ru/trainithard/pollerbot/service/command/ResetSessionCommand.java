@@ -9,7 +9,7 @@ public class ResetSessionCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         getSession(userMessage).reset();
-        saveUserSession(userMessage);
+        saveSession(userMessage);
         return getTextMessage(userMessage);
     }
 

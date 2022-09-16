@@ -17,7 +17,7 @@ public class RegisterNamesCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
-            saveUserSession(shiftSessionToThisCommand(userMessage));
+            saveSession(shiftSessionToThisCommand(userMessage));
             return getTextMessage(userMessage);
         }
 

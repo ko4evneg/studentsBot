@@ -50,6 +50,14 @@ public abstract class AbstractCommand {
         sessionService.save(userMessage.getUser(), userMessage.getSession());
     }
 
+    protected void saveUser(UserMessage userMessage) {
+        userService.save(userMessage.getUser());
+    }
+
+    protected void saveSession(UserMessage userMessage) {
+        sessionService.save(userMessage.getUser(), userMessage.getSession());
+    }
+
     protected SendMessage getTextMessage(UserMessage userMessage) {
         return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.getText(getCommandName()));
     }

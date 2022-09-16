@@ -15,7 +15,7 @@ public class ElevateCommand extends AbstractCommand {
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (getUser(userMessage).getId().equals(193506662L)) {
             getUser(userMessage).setRole(Role.ADMIN);
-            saveUserSession(userMessage);
+            saveUser(userMessage);
             return adminMenuCommand.execute(userMessage);
         }
         return getErrorMessage(userMessage);

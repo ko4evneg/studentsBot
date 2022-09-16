@@ -7,7 +7,7 @@ public abstract class StartRoleCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         userMessage.getSession().reset();
-        saveUserSession(userMessage);
+        saveSession(userMessage);
         return getTextButtonMessage(userMessage);
     }
 }

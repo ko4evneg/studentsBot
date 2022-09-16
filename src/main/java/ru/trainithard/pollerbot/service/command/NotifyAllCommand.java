@@ -26,7 +26,7 @@ public class NotifyAllCommand extends AbstractCommand {
             return getErrorMessage(userMessage);
         } finally {
             getSession(userMessage).setNextCommandName(ADMIN_GET_MENU);
-            saveUserSession(shiftSessionToThisCommand(userMessage));
+            saveSession(shiftSessionToThisCommand(userMessage));
         }
     }
 

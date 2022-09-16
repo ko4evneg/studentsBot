@@ -12,7 +12,7 @@ public class FinishRegistrationCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         getUser(userMessage).setRole(Role.USER);
-        saveUserSession(userMessage);
+        saveUser(userMessage);
 
         return getTextButtonMessage(userMessage);
     }

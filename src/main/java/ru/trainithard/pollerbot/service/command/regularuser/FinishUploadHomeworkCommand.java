@@ -10,11 +10,11 @@ import static ru.trainithard.pollerbot.service.command.CommandName.FINISH_UPLOAD
 
 @Component
 public class FinishUploadHomeworkCommand extends AbstractCommand {
+
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         return getTextButtonMessage(userMessage);
     }
-
 
     @Override
     public CommandName getCommandName() {

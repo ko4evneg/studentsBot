@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.trainithard.pollerbot.exception.PollerBotException;
 import ru.trainithard.pollerbot.service.NotificationService;
 import ru.trainithard.pollerbot.service.command.AbstractCommand;
 import ru.trainithard.pollerbot.service.command.CommandName;
@@ -15,7 +16,6 @@ import static ru.trainithard.pollerbot.service.command.CommandName.NOTIFY_ALL;
 
 @Component
 public class NotifyAllCommand extends AbstractCommand {
-    @Lazy
     @Autowired
     private NotificationService notificationService;
 
@@ -24,7 +24,7 @@ public class NotifyAllCommand extends AbstractCommand {
         try {
             notificationService.notifyAll(userMessage.getMessage());
             return getTextMessage(userMessage);
-        } catch (TelegramApiException e) {
+        } catch (PollerBotException e) {
             return getErrorMessage(userMessage);
         } finally {
             getSession(userMessage).setNextCommandName(ADMIN_GET_MENU);

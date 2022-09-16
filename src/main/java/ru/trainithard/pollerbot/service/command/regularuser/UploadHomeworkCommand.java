@@ -1,4 +1,4 @@
-package ru.trainithard.pollerbot.service.command;
+package ru.trainithard.pollerbot.service.command.regularuser;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
 import org.telegram.telegrambots.meta.api.objects.Document;
 import ru.trainithard.pollerbot.service.HomeworkFilesStorageService;
+import ru.trainithard.pollerbot.service.command.AbstractCommand;
+import ru.trainithard.pollerbot.service.command.CommandName;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 import ru.trainithard.pollerbot.service.validator.HomeworkFileValidator;
 

@@ -1,5 +1,6 @@
 package ru.trainithard.pollerbot.repository;
 
+import ru.trainithard.pollerbot.model.Role;
 import ru.trainithard.pollerbot.model.User;
 
 import java.util.*;
@@ -15,6 +16,13 @@ public class InMemoryUserRepository implements UserRepository {
     @Override
     public Collection<User> getAll() {
         return users.values();
+    }
+
+    @Override
+    public List<User> getByRole(Role role) {
+        return users.values().stream()
+                .filter(user -> role.equals(user.getRole()))
+                .toList();
     }
 
     @Override

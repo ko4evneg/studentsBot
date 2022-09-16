@@ -2,6 +2,7 @@ package ru.trainithard.pollerbot.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.trainithard.pollerbot.model.Role;
 import ru.trainithard.pollerbot.model.User;
 import ru.trainithard.pollerbot.repository.UserRepository;
 
@@ -22,6 +23,11 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         return repository.getAll()
                 .stream().toList();
+    }
+
+    @Override
+    public List<User> getByRole(Role role) {
+        return repository.getByRole(role);
     }
 
     @Override

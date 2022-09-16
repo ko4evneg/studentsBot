@@ -3,6 +3,7 @@ package ru.trainithard.pollerbot.repository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import ru.trainithard.pollerbot.model.Role;
 import ru.trainithard.pollerbot.model.User;
 
 import java.util.Collection;
@@ -22,6 +23,11 @@ public class DataJpaUserRepositoryAdapter implements UserRepository {
     @Override
     public Collection<User> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<User> getByRole(Role role) {
+        return repository.findByRole(role);
     }
 
     @Override

@@ -3,6 +3,7 @@ package ru.trainithard.pollerbot.service.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.telegram.telegrambots.meta.api.objects.Document;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.trainithard.pollerbot.model.Session;
 import ru.trainithard.pollerbot.model.User;
@@ -50,5 +51,13 @@ public class UserMessage {
 
     public String getCallbackData() {
         return update.getCallbackQuery().getData();
+    }
+
+    public boolean hasFile(){
+        return getUpdate().getMessage().hasDocument();
+    }
+
+    public Document getFile() {
+        return getUpdate().getMessage().getDocument();
     }
 }

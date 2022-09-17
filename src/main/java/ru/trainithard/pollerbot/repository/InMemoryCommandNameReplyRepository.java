@@ -36,7 +36,7 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
         putButtonedReply(USER_GET_LESSONS, getArrayOf("Список уроков", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
         putTextReply(USER_UPLOAD_HOMEWORK, getArrayOf("Перенесите файл в чат. Файл должен быть .zip или .rar архивом, менее 10МБ.",
-                "Неверное имя файла. Загрузите правильный файл."));
+                "Неверный формат файла. Загрузите правильный файл."));
         putButtonedReply(FINISH_UPLOAD_HOMEWORK, getArrayOf("Домашнее задание успешно загружено", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
 

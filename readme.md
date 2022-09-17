@@ -6,7 +6,8 @@ Bot abilities:
 - send all users notifications (admin)
 
 _Todo:_
-- admin: download homeworks
+- admin: download homework
+- admin: add notify all confirmation
 - add polling for lessons
 - add lessons search: by tag, by number
 - prohibit old commands use

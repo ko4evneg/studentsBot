@@ -26,4 +26,9 @@ public class LessonServiceImpl implements LessonService {
     public Optional<Lesson> findByNumber(int number) {
         return repository.findById(number);
     }
+
+    @Override
+    public List<Lesson> findByKeyword(String keyword) {
+        return repository.findByKeyword(keyword);
+    }
 }

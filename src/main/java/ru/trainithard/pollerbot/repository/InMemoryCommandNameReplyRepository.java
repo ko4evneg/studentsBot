@@ -36,9 +36,11 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
         putButtonedReply(LESSONS_MENU, getArrayOf("Выберите действие:", ""),
                 List.of(List.of(new Button("Показать последние уроки", RECENT_LESSONS)),
                         List.of(new Button("Поиск по номеру", SEARCH_LESSON_BY_NUMBER),
-                                new Button("Поиск по ключевым словам", SEARCH_LESSON_BY_KEYWORD))));
-        putButtonedReply(SEARCH_LESSON_BY_NUMBER, getArrayOf("Введите номер урока:", "Урок с таким номером не найден! Повторите ввод:"),
-                List.of(List.of(new Button("В меню", USER_GET_MENU))));
+                                new Button("Поиск по ключевому слову", SEARCH_LESSON_BY_KEYWORD))));
+        putButtonedReply(SEARCH_LESSON_BY_NUMBER, getArrayOf("Введите номер урока:", "Необходимо ввести число, попробуйте еще раз:"),
+                List.of(List.of(new Button("В меню", USER_GET_MENU), new Button("Найти еще раз", SEARCH_LESSON_BY_NUMBER))));
+        putButtonedReply(SEARCH_LESSON_BY_KEYWORD, getArrayOf("Введите ключевое слово:", "Необходимо ввести ключевое слово, попробуйте еще ра:!"),
+                List.of(List.of(new Button("В меню", USER_GET_MENU), new Button("Найти еще раз", SEARCH_LESSON_BY_KEYWORD))));
         putButtonedReply(RECENT_LESSONS, getArrayOf("Список последних уроков:", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
         putTextReply(USER_UPLOAD_HOMEWORK, getArrayOf("Перенесите файл в чат. Файл должен быть .zip или .rar архивом, менее 10МБ.",

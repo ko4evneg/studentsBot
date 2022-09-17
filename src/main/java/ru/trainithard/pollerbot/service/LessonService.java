@@ -9,4 +9,6 @@ public interface LessonService {
     List<Lesson> findLatest(int count);
 
     Optional<Lesson> findByNumber(int number);
+
+    List<Lesson> findByKeyword(String keyword);
 }

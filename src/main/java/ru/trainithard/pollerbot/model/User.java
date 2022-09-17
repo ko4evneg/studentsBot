@@ -19,6 +19,9 @@ public class User extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "nick_name")
+    private String nickName;
+
     @Column(name = "email")
     private String email;
 
@@ -40,11 +43,11 @@ public class User extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         User user = (User) o;
-        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && role == user.role;
+        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(nickName, user.nickName) && Objects.equals(email, user.email) && Objects.equals(chatId, user.chatId) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), firstName, lastName, email, role);
+        return Objects.hash(super.hashCode(), firstName, lastName, nickName, email, chatId, role);
     }
 }

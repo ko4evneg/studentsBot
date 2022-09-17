@@ -17,6 +17,7 @@
             </column>
             <column name="first_name" type="VARCHAR(255)"/>
             <column name="last_name" type="VARCHAR(255)"/>
+            <column name="nick_name" type="VARCHAR(255)"/>
             <column name="email" type="VARCHAR(255)"/>
             <column name="chat_id" type="BIGINT"/>
             <column name="role" type="VARCHAR(50)"/>

@@ -16,8 +16,8 @@ public class RegularUserDataCommand extends AbstractCommand {
     }
 
     private String getUserDataMessage(UserMessage userMessage) {
-        return String.format("Ваши данные:\r\nФИО: %s %s\r\nemail: %s\r\n", getUser(userMessage).getFirstName(),
-                getUser(userMessage).getLastName(), getUser(userMessage).getEmail());
+        return String.format("Ваши данные:\r\nФИО: %s %s\r\nemail: %s\r\nusername: %s", getUser(userMessage).getFirstName(),
+                getUser(userMessage).getLastName(), getUser(userMessage).getEmail(), getUser(userMessage).getNickName());
     }
 
     @Override

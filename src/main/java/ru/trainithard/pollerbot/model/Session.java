@@ -1,18 +1,23 @@
 package ru.trainithard.pollerbot.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import ru.trainithard.pollerbot.service.command.CommandName;
 
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 public class Session {
     private CommandName previousCommandName;
     private CommandName nextCommandName;
-    @Getter
     private Role role;
-    @Getter
     private long version;
+    private LocalDateTime lastAccessTime;
 
     public Session(Role role) {
         this.role = role;
+        lastAccessTime = LocalDateTime.now();
     }
 
     public void reset() {

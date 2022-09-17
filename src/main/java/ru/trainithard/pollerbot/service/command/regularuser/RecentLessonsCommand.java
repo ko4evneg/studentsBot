@@ -12,11 +12,11 @@ import ru.trainithard.pollerbot.service.dto.UserMessage;
 import java.util.Comparator;
 import java.util.List;
 
-import static ru.trainithard.pollerbot.service.command.CommandName.USER_GET_LESSONS;
+import static ru.trainithard.pollerbot.service.command.CommandName.RECENT_LESSONS;
 
 @Component
 @RequiredArgsConstructor
-public class RegularUserLessonsCommand extends AbstractCommand {
+public class RecentLessonsCommand extends AbstractCommand {
     private static final int LESSONS_QUANTITY_TO_FETCH = 3;
 
     private final LessonService lessonService;
@@ -44,6 +44,6 @@ public class RegularUserLessonsCommand extends AbstractCommand {
 
     @Override
     public CommandName getCommandName() {
-        return USER_GET_LESSONS;
+        return RECENT_LESSONS;
     }
 }

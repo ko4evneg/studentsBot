@@ -45,6 +45,12 @@ public abstract class AbstractCommand {
         return userMessage.getSession().getPreviousCommandName() != getCommandName();
     }
 
+    protected SendMessage saveSessionPreviousCommandAndGetReply(UserMessage userMessage) {
+        userMessage.setPreviousCommandName(getCommandName());
+        saveSession(userMessage);
+        return getTextMessage(userMessage);
+    }
+
     protected void saveUserSession(UserMessage userMessage) {
         userService.save(getUser(userMessage));
         sessionService.save(userMessage.getUserId(), userMessage.getSession());

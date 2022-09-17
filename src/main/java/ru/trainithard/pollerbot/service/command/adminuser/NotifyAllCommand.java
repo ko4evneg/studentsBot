@@ -1,10 +1,8 @@
 package ru.trainithard.pollerbot.service.command.adminuser;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.trainithard.pollerbot.exception.PollerBotException;
 import ru.trainithard.pollerbot.service.NotificationService;
 import ru.trainithard.pollerbot.service.command.AbstractCommand;
@@ -27,8 +25,8 @@ public class NotifyAllCommand extends AbstractCommand {
         } catch (PollerBotException e) {
             return getErrorMessage(userMessage);
         } finally {
-            getSession(userMessage).setNextCommandName(ADMIN_GET_MENU);
-            saveSession(shiftSessionToThisCommand(userMessage));
+            getSession(userMessage).setPreviousNextCommandNames(getCommandName(), ADMIN_GET_MENU);
+            saveSession(userMessage);
         }
     }
 

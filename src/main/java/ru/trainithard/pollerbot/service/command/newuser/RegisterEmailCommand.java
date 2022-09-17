@@ -17,9 +17,7 @@ public class RegisterEmailCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
-            userMessage.setPreviousCommandName(getCommandName());
-            saveSession(userMessage);
-            return getTextMessage(userMessage);
+            return saveSessionPreviousCommandAndGetReply(userMessage);
         }
 
         if (!validator.validate(userMessage.getMessage())) {

@@ -9,7 +9,6 @@ _Todo:_
 - admin: download homeworks
 - add polling for lessons
 - add lessons search: by tag, by number
-- homework upload to separate folders
 - prohibit old commands use
 - session staling
 - users authorization

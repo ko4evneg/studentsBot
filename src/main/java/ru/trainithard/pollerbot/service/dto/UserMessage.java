@@ -23,6 +23,27 @@ public class UserMessage {
         return user.getId();
     }
 
+    public String getFirstName() {
+        return user.getFirstName() == null ? "" : user.getFirstName();
+    }
+
+    public String getLastName() {
+        return user.getLastName() == null ? "" : user.getLastName();
+    }
+
+    public String getNickName() {
+        return user.getNickName() == null ? "" : user.getNickName();
+    }
+
+    public String getEmail() {
+        return user.getEmail();
+    }
+
+    public String getEmailInFileFormat() {
+        String email = getEmail().replace("@", "_");
+        return email.replaceFirst("\\.\\D+$", "");
+    }
+
     public String getMessage() {
         return update.getMessage().getText();
     }

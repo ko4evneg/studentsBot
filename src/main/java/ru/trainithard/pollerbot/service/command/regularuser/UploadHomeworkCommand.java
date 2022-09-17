@@ -44,8 +44,8 @@ public class UploadHomeworkCommand extends AbstractCommand {
     }
 
     private String getNotifyMessage(UserMessage userMessage) {
-        return String.format("Пользователь %s %s (%s) загрузил домашнее задание: %s.", getUser(userMessage).getFirstName(),
-                getUser(userMessage).getLastName(), getUser(userMessage).getEmail(), getDocument(userMessage).getFileName());
+        return String.format("Пользователь %s %s (%s) загрузил домашнее задание: %s.", userMessage.getFirstName(),
+                userMessage.getLastName(), userMessage.getEmail(), getDocument(userMessage).getFileName());
     }
 
     private Document getDocument(UserMessage userMessage) {

@@ -30,7 +30,7 @@ public abstract class AbstractCommand {
     public abstract BotApiMethodMessage execute(UserMessage userMessage);
 
     protected Long getUserId(UserMessage userMessage) {
-        return getUser(userMessage).getId();
+        return userMessage.getUserId();
     }
 
     /**
@@ -51,7 +51,7 @@ public abstract class AbstractCommand {
 
     protected void saveUserSession(UserMessage userMessage) {
         userService.save(getUser(userMessage));
-        sessionService.save(getUser(userMessage).getId(), userMessage.getSession());
+        sessionService.save(userMessage.getUserId(), userMessage.getSession());
     }
 
     protected void saveUser(UserMessage userMessage) {
@@ -59,7 +59,7 @@ public abstract class AbstractCommand {
     }
 
     protected void saveSession(UserMessage userMessage) {
-        sessionService.save(getUser(userMessage).getId(), userMessage.getSession());
+        sessionService.save(userMessage.getUserId(), userMessage.getSession());
     }
 
     protected SendMessage getTextMessage(UserMessage userMessage) {
@@ -89,8 +89,7 @@ public abstract class AbstractCommand {
     }
 
     protected User getFreshUser(UserMessage userMessage) {
-        Long userId = getUser(userMessage).getId();
-        return userService.get(userId);
+        return userService.get(userMessage.getUserId());
     }
 
     protected Session getSession(UserMessage userMessage) {

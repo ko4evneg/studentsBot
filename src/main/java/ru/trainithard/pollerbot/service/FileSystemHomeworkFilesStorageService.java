@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.Document;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.trainithard.pollerbot.exception.PollerBotException;
+import ru.trainithard.pollerbot.service.dto.UserMessage;
 
 import java.io.*;
 
@@ -19,16 +19,22 @@ public class FileSystemHomeworkFilesStorageService implements HomeworkFilesStora
     private final PollerBotProxy pollerBot;
 
     @Override
-    public void save(Document document) {
-        //todo student folder
-        File destinationFile = new File(storageDirectory + "/" + document.getFileName());
+    public void save(UserMessage userMessage) throws TelegramApiException, IOException {
+        File destinationFile = new File(storageDirectory + "/" + getNickName(userMessage) + "/" + getDocument(userMessage).getFileName());
+        Files.createParentDirs(destinationFile);
         try (BufferedOutputStream outputStream = getBufferedOutputStream(destinationFile)) {
-            org.telegram.telegrambots.meta.api.objects.File file = pollerBot.execute(getGetFile(document));
+            org.telegram.telegrambots.meta.api.objects.File file = pollerBot.execute(getGetFile(getDocument(userMessage)));
             File sourceFile = pollerBot.downloadFile(file);
             Files.copy(sourceFile, outputStream);
-        } catch (IOException | TelegramApiException e) {
-            throw new PollerBotException("Can't save file!", e);
         }
+    }
+
+    private Document getDocument(UserMessage userMessage) {
+        return userMessage.getUpdate().getMessage().getDocument();
+    }
+
+    private String getNickName(UserMessage userMessage) {
+        return userMessage.getUser().getNickName();
     }
 
     private BufferedOutputStream getBufferedOutputStream(File destinationFile) throws FileNotFoundException {

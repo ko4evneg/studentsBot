@@ -10,5 +10,4 @@ _Todo:_
 - admin: add notify all confirmation
 - add polling for lessons
 - add lessons search: by tag, by number
-- session staling
 - users authorization

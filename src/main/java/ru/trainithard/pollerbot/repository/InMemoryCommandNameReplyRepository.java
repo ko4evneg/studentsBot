@@ -50,6 +50,7 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
         putTextReply(RESET_SESSION, "Сессия успешно сброшена", "");
         putTextReply(HELP, "Помощь:\r\n /reset - сброс сессии пользователя", "");
         putTextReply(ELEVATE, "Elevation successful", "No rights for elevation");
+        putTextReply(DELEVATE, "De-elevation successful", "No rights for de-elevation");
     }
 
     private void putTextReply(CommandName notifyAll, String...replyTexts) {

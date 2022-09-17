@@ -6,7 +6,7 @@ import ru.trainithard.pollerbot.service.dto.UserMessage;
 public abstract class StartRoleCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        userMessage.getSession().reset();
+        getSession(userMessage).reset();
         saveSession(userMessage);
         return getTextButtonMessage(userMessage);
     }

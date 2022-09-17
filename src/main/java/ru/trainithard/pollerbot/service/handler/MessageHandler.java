@@ -7,7 +7,7 @@ import ru.trainithard.pollerbot.model.User;
 import ru.trainithard.pollerbot.service.UserService;
 import ru.trainithard.pollerbot.service.command.AbstractCommand;
 import ru.trainithard.pollerbot.service.command.CommandName;
-import ru.trainithard.pollerbot.service.component.SessionFinder;
+import ru.trainithard.pollerbot.service.component.SessionRetriever;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ public abstract class MessageHandler {
     @Autowired
     protected UserService userService;
     @Autowired
-    protected SessionFinder sessionFinder;
+    protected SessionRetriever sessionRetriever;
     @Autowired
     protected Map<CommandName, AbstractCommand> commands;
 
@@ -31,7 +31,7 @@ public abstract class MessageHandler {
         return UserMessage.builder()
                 .update(update)
                 .user(user)
-                .session(sessionFinder.find(userId))
+                .session(sessionRetriever.find(userId))
                 .build();
     }
 }

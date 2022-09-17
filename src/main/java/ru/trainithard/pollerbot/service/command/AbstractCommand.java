@@ -29,6 +29,10 @@ public abstract class AbstractCommand {
      */
     public abstract BotApiMethodMessage execute(UserMessage userMessage);
 
+    protected Long getUserId(UserMessage userMessage) {
+        return getUser(userMessage).getId();
+    }
+
     /**
      * Used for lookup of corresponding command. Should be added to CommandName enum.
      *
@@ -82,6 +86,11 @@ public abstract class AbstractCommand {
 
     protected User getUser(UserMessage userMessage) {
         return userMessage.getUser();
+    }
+
+    protected User getFreshUser(UserMessage userMessage) {
+        Long userId = getUser(userMessage).getId();
+        return userService.get(userId);
     }
 
     protected Session getSession(UserMessage userMessage) {

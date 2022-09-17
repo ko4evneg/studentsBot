@@ -26,7 +26,8 @@ public enum CommandName {
 
     HELP("/help"),
     RESET_SESSION("/reset"),
-    ELEVATE("/elevate");
+    ELEVATE("/elevate"),
+    DELEVATE("/delevate");
 
     CommandName(String name) {
         this.name = name;

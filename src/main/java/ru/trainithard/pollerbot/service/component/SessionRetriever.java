@@ -9,13 +9,17 @@ import ru.trainithard.pollerbot.service.UserService;
 
 @Component
 @RequiredArgsConstructor
-public class SessionFinder {
+public class SessionRetriever {
     private final SessionService sessionService;
     private final UserService userService;
 
     public Session find(Long userId) {
         return sessionService.get(userId)
                 .orElse(new Session(getUserRole(userId)));
+    }
+
+    public Session getNew(Long userId) {
+        return new Session(getUserRole(userId));
     }
 
     private Role getUserRole(Long userId) {

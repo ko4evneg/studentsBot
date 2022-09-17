@@ -14,12 +14,12 @@ public class NotificationService {
     private final PollerBotProxy pollerBot;
 
     public void notifyAll(String messageText) {
-        userService.getAllChatIds()
+        userService.findAllChatIds()
                 .forEach((chatId) -> trySend(messageText, chatId));
     }
 
     public void notifyAdmins(String messageText) {
-        userService.getByRole(Role.ADMIN)
+        userService.findByRole(Role.ADMIN)
                 .forEach((user) -> trySend(messageText, user.getChatId()));
     }
 

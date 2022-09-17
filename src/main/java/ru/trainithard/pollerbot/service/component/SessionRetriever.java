@@ -14,7 +14,7 @@ public class SessionRetriever {
     private final UserService userService;
 
     public Session find(Long userId) {
-        return sessionService.get(userId)
+        return sessionService.find(userId)
                 .orElse(new Session(getUserRole(userId)));
     }
 
@@ -23,6 +23,6 @@ public class SessionRetriever {
     }
 
     private Role getUserRole(Long userId) {
-        return userService.get(userId).getRole();
+        return userService.find(userId).getRole();
     }
 }

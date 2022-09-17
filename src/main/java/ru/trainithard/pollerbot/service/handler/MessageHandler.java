@@ -23,7 +23,7 @@ public abstract class MessageHandler {
     public abstract BotApiMethodMessage handle(Update update);
 
     protected UserMessage createUserMessage(Update update, Long userId, Long...chatId) {
-        User user = userService.get(userId);
+        User user = userService.find(userId);
         if (chatId[0] != null) {
             user.setChatId(chatId[0]);
         }

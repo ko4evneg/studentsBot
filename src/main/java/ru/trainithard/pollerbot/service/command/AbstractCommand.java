@@ -92,6 +92,6 @@ public abstract class AbstractCommand {
     }
 
     protected User getFreshUser(UserMessage userMessage) {
-        return userService.get(userMessage.getUserId());
+        return userService.find(userMessage.getUserId());
     }
 }

@@ -3,7 +3,6 @@ package ru.trainithard.pollerbot.service;
 import com.google.common.io.Files;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.objects.Document;
@@ -17,8 +16,7 @@ import java.io.*;
 public class FileSystemHomeworkFilesStorageService implements HomeworkFilesStorageService {
     @Value("${pollerbot.homework.directory}")
     private String storageDirectory;
-    @Lazy
-    private final PollerBot pollerBot;
+    private final PollerBotProxy pollerBot;
 
     @Override
     public void save(Document document) {

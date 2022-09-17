@@ -29,11 +29,17 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
 
         //regular user texts
         putButtonedReply(USER_GET_MENU, getArrayOf("МЕНЮ", ""),
-                List.of(List.of(new Button("Мои данные", USER_GET_DATA), new Button("Уроки", USER_GET_LESSONS)),
+                List.of(List.of(new Button("Мои данные", USER_GET_DATA), new Button("Уроки", LESSONS_MENU)),
                         List.of(new Button("Загрузить домашнее задание", USER_UPLOAD_HOMEWORK))));
         putButtonedReply(USER_GET_DATA, getArrayOf("Ваши данные", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
-        putButtonedReply(USER_GET_LESSONS, getArrayOf("Список последних уроков:", ""),
+        putButtonedReply(LESSONS_MENU, getArrayOf("Выберите действие:", ""),
+                List.of(List.of(new Button("Показать последние уроки", RECENT_LESSONS)),
+                        List.of(new Button("Поиск по номеру", SEARCH_LESSON_BY_NUMBER),
+                                new Button("Поиск по ключевым словам", SEARCH_LESSON_BY_KEYWORD))));
+        putButtonedReply(SEARCH_LESSON_BY_NUMBER, getArrayOf("Введите номер урока:", "Урок с таким номером не найден! Повторите ввод:"),
+                List.of(List.of(new Button("В меню", USER_GET_MENU))));
+        putButtonedReply(RECENT_LESSONS, getArrayOf("Список последних уроков:", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
         putTextReply(USER_UPLOAD_HOMEWORK, getArrayOf("Перенесите файл в чат. Файл должен быть .zip или .rar архивом, менее 10МБ.",
                 "Неверный формат файла. Загрузите правильный файл."));

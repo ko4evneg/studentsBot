@@ -1,0 +1,61 @@
+package ru.trainithard.pollerbot.service.command.regularuser;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
+import ru.trainithard.pollerbot.model.Lesson;
+import ru.trainithard.pollerbot.service.LessonService;
+import ru.trainithard.pollerbot.service.command.AbstractCommand;
+import ru.trainithard.pollerbot.service.command.CommandName;
+import ru.trainithard.pollerbot.service.dto.UserMessage;
+
+import java.util.Optional;
+
+import static ru.trainithard.pollerbot.service.command.CommandName.SEARCH_LESSON_BY_NUMBER;
+
+@Component
+@RequiredArgsConstructor
+public class SearchLessonsByNumberCommand extends AbstractCommand {
+    private final LessonService lessonService;
+    private final LessonsMenuCommand lessonsMenuCommand;
+
+    @Override
+    public BotApiMethodMessage execute(UserMessage userMessage) {
+        if (isFirstInvocation(userMessage)) {
+            return saveSessionPreviousCommandAndGetReply(userMessage);
+        }
+
+        if (!validateInput(userMessage)) {
+            return getErrorMessage(userMessage);
+        }
+
+        Optional<Lesson> lessonOptional = lessonService.findByNumber(getLessonNumber(userMessage));
+        if (lessonOptional.isPresent()) {
+            return getCustomTextButtonMessage(userMessage, getLessonString(lessonOptional.get()));
+        } else {
+            return getCustomTextButtonMessage(userMessage, "Урок с таким номером не найден!");
+        }
+    }
+
+    private boolean validateInput(UserMessage userMessage) {
+        try {
+            getLessonNumber(userMessage);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private Integer getLessonNumber(UserMessage userMessage) {
+        return Integer.parseInt(userMessage.getMessage());
+    }
+
+    private String getLessonString(Lesson lesson) {
+        return String.format("Урок %d: %s \r\n %s\r\n", lesson.getNumber(), lesson.getTitle(), lesson.getUrl());
+    }
+
+    @Override
+    public CommandName getCommandName() {
+        return SEARCH_LESSON_BY_NUMBER;
+    }
+}

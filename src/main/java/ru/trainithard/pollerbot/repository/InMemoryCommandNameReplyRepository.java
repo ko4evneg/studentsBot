@@ -21,8 +21,8 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
     public void fill() {
         //new user texts
         putButtonedReply(NO_COMMAND, getArrayOf("Вас приветствует TrainItHard бот. Для использования требуется регистрация: ",
-                "Хотите начать регистрацию?"), List.of(List.of(new Button("Начать регистрацию", REGISTER_NAMES))));
-        putTextReply(REGISTER_NAMES, "Для регистрации укажите Имя и Фамилию (в таком же порядке): ", "Неверные Имя Фамилия, попробуйте еще раз:");
+                "Хотите начать регистрацию?"), List.of(List.of(new Button("Начать регистрацию", REGISTER_EMAIL))));
+        putTextReply(REGISTER_NAMES, "Укажите Имя и Фамилию (в таком же порядке): ", "Неверные Имя Фамилия, попробуйте еще раз:");
         putTextReply(REGISTER_EMAIL, "Укажите email для связи: ", "Неверный email, попробуйте еще раз:");
         putButtonedReply(FINISH_REGISTRATION, getArrayOf("Успешная регистрация!", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
@@ -33,7 +33,7 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
                         List.of(new Button("Загрузить домашнее задание", USER_UPLOAD_HOMEWORK))));
         putButtonedReply(USER_GET_DATA, getArrayOf("Ваши данные", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
-        putButtonedReply(USER_GET_LESSONS, getArrayOf("Список уроков", ""),
+        putButtonedReply(USER_GET_LESSONS, getArrayOf("Список последних уроков:", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
         putTextReply(USER_UPLOAD_HOMEWORK, getArrayOf("Перенесите файл в чат. Файл должен быть .zip или .rar архивом, менее 10МБ.",
                 "Неверный формат файла. Загрузите правильный файл."));

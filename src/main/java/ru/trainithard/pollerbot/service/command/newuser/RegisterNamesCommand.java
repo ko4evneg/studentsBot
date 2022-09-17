@@ -14,7 +14,7 @@ import static ru.trainithard.pollerbot.service.command.CommandName.REGISTER_NAME
 @RequiredArgsConstructor
 public class RegisterNamesCommand extends AbstractCommand {
     private final UserNamesValidator validator;
-    private final RegisterEmailCommand registerEmailCommand;
+    private final FinishRegistrationCommand finishRegistrationCommand;
 
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
@@ -27,12 +27,12 @@ public class RegisterNamesCommand extends AbstractCommand {
         if (!validator.validate(userMessage.getMessage())) {
             return getErrorMessage(userMessage);
         } else {
-            userMessage.setNextCommandName(CommandName.REGISTER_EMAIL);
+            userMessage.setNextCommandName(CommandName.FINISH_REGISTRATION);
             getUser(userMessage).setFirstName(getFirstName(userMessage));
             getUser(userMessage).setLastName(getLastName(userMessage));
             getUser(userMessage).setNickName(getNickName(userMessage));
             saveUserSession(userMessage);
-            return registerEmailCommand.execute(userMessage);
+            return finishRegistrationCommand.execute(userMessage);
         }
     }
 

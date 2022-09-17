@@ -1,7 +1,6 @@
 package ru.trainithard.pollerbot.util;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -9,11 +8,15 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import ru.trainithard.pollerbot.exception.PollerBotException;
 import ru.trainithard.pollerbot.service.command.CommandName;
+import ru.trainithard.pollerbot.service.component.ButtonVersionEnricher;
 
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class MessageConstructor {
+    private final ButtonVersionEnricher buttonVersionEnricher;
+
     public SendMessage construct(Long chatId, String text) {
         return SendMessage.builder()
                 .text(text)
@@ -52,6 +55,10 @@ public class MessageConstructor {
                 .text(button.text())
                 .callbackData(button.commandName().toString() + "___" + button.version())
                 .build();
+    }
+
+    public List<List<MessageConstructor.Button>> getEnrichedVersionButtons(List<List<MessageConstructor.Button>> buttons, long sessionVersion) {
+        return buttonVersionEnricher.enrich(buttons, sessionVersion);
     }
 
     public SendMessage constructError(Long chatId, PollerBotException exception) {

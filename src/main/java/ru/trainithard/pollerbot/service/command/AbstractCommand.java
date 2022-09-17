@@ -7,7 +7,6 @@ import ru.trainithard.pollerbot.model.User;
 import ru.trainithard.pollerbot.repository.CommandNameReplyRepository;
 import ru.trainithard.pollerbot.service.SessionService;
 import ru.trainithard.pollerbot.service.UserService;
-import ru.trainithard.pollerbot.service.component.ButtonVersionEnricher;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 import ru.trainithard.pollerbot.util.MessageConstructor;
 
@@ -22,8 +21,6 @@ public abstract class AbstractCommand {
     protected SessionService sessionService;
     @Autowired
     protected CommandNameReplyRepository commandNameReplyRepository;
-    @Autowired
-    protected ButtonVersionEnricher buttonVersionEnricher;
 
     /**
      * Executes command based on UserMessage data.
@@ -67,17 +64,19 @@ public abstract class AbstractCommand {
 
     protected SendMessage getTextButtonMessage(UserMessage userMessage) {
         return messageConstructor.constructTextButtons(userMessage.getChatId(),
-                commandNameReplyRepository.findText(getCommandName()), getEnrichedVersionButtons(userMessage.getSessionVersion()));
+                commandNameReplyRepository.findText(getCommandName()),
+                messageConstructor.getEnrichedVersionButtons(getCommandNameButtons(), userMessage.getSessionVersion()));
     }
 
     protected SendMessage getCustomTextButtonMessage(UserMessage userMessage, String text) {
         return messageConstructor.constructTextButtons(userMessage.getChatId(), text,
-                getEnrichedVersionButtons(userMessage.getSessionVersion()));
+                messageConstructor.getEnrichedVersionButtons(getCommandNameButtons(), userMessage.getSessionVersion()));
     }
 
-    private List<List<MessageConstructor.Button>> getEnrichedVersionButtons(long sessionVersion) {
-        return buttonVersionEnricher.enrich(commandNameReplyRepository.findButtons(getCommandName()), sessionVersion);
+    private List<List<MessageConstructor.Button>> getCommandNameButtons() {
+        return commandNameReplyRepository.findButtons(getCommandName());
     }
+
 
     protected SendMessage getCustomTextMessage(UserMessage userMessage, String text) {
         return messageConstructor.constructText(userMessage.getChatId(), text);

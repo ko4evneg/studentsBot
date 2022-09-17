@@ -9,14 +9,15 @@ import ru.trainithard.pollerbot.service.command.AbstractCommand;
 import ru.trainithard.pollerbot.service.command.CommandName;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 
-import java.util.Optional;
+import java.util.Comparator;
+import java.util.List;
 
 import static ru.trainithard.pollerbot.service.command.CommandName.LESSONS_MENU;
-import static ru.trainithard.pollerbot.service.command.CommandName.SEARCH_LESSON_BY_NUMBER;
+import static ru.trainithard.pollerbot.service.command.CommandName.SEARCH_LESSON_BY_KEYWORD;
 
 @Component
 @RequiredArgsConstructor
-public class SearchLessonsByNumberCommand extends AbstractCommand {
+public class SearchLessonsByKeywordCommand extends AbstractCommand {
     private final LessonService lessonService;
 
     @Override
@@ -25,39 +26,38 @@ public class SearchLessonsByNumberCommand extends AbstractCommand {
             return saveSessionPreviousCommandAndGetReply(userMessage);
         }
 
-        if (!validateInputIsNumber(userMessage)) {
+        if (!validateInputIsSingleWord(userMessage)) {
             return getErrorMessage(userMessage);
         }
 
-        Optional<Lesson> lessonOptional = lessonService.findByNumber(getLessonNumber(userMessage));
-        if (lessonOptional.isPresent()) {
-            return getCustomTextButtonMessage(userMessage, getLessonString(lessonOptional.get()));
-        } else {
+        List<Lesson> lessons = lessonService.findByKeyword(userMessage.getMessage());
+        if (lessons.isEmpty()) {
             userMessage.setPreviousCommandName(LESSONS_MENU);
             saveSession(userMessage);
-            return getCustomTextButtonMessage(userMessage, "Урок с таким номером не найден!");
+            return getCustomTextButtonMessage(userMessage, "Урок с таким ключевым словом не найден!");
+        } else {
+            return getCustomTextButtonMessage(userMessage, getAllLessonsString(lessons));
         }
     }
 
-    private boolean validateInputIsNumber(UserMessage userMessage) {
-        try {
-            getLessonNumber(userMessage);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
+    private boolean validateInputIsSingleWord(UserMessage userMessage) {
+        return userMessage.getMessage().matches("^\\w+$");
     }
 
-    private Integer getLessonNumber(UserMessage userMessage) {
-        return Integer.parseInt(userMessage.getMessage());
+    private String getAllLessonsString(List<Lesson> lessons) {
+        return lessons.stream()
+                .sorted(Comparator.comparing(Lesson::getNumber))
+                .map(this::getLessonString)
+                .reduce(String::concat)
+                .orElse("уроков нет");
     }
 
     private String getLessonString(Lesson lesson) {
-        return String.format("Урок %d: %s \r\n %s\r\n", lesson.getNumber(), lesson.getTitle(), lesson.getUrl());
+        return String.format("%d: %s \r\n %s\r\n", lesson.getNumber(), lesson.getTitle(), lesson.getUrl());
     }
 
     @Override
     public CommandName getCommandName() {
-        return SEARCH_LESSON_BY_NUMBER;
+        return SEARCH_LESSON_BY_KEYWORD;
     }
 }

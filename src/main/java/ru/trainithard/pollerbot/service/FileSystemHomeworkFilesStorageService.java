@@ -1,7 +1,6 @@
 package ru.trainithard.pollerbot.service;
 
 import com.google.common.io.Files;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -13,12 +12,14 @@ import ru.trainithard.pollerbot.exception.PollerBotException;
 import java.io.*;
 
 @Service
-@RequiredArgsConstructor
 public class FileSystemHomeworkFilesStorageService implements HomeworkFilesStorageService {
     @Value("${pollerbot.homework.directory}")
     private String storageDirectory;
-    @Lazy
-    private final PollerBot pollerBot;
+    private PollerBot pollerBot;
+
+    public FileSystemHomeworkFilesStorageService(@Lazy PollerBot pollerBot) {
+        this.pollerBot = pollerBot;
+    }
 
     @Override
     public void save(Document document) {

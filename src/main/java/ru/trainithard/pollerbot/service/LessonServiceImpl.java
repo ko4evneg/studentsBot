@@ -31,4 +31,9 @@ public class LessonServiceImpl implements LessonService {
     public List<Lesson> findByKeyword(String keyword) {
         return repository.findByKeyword(keyword);
     }
+
+    @Override
+    public List<String> findAllKeywords() {
+        return repository.findAllKeywords();
+    }
 }

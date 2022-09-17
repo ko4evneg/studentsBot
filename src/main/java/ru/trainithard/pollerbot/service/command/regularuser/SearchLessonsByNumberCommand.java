@@ -30,11 +30,11 @@ public class SearchLessonsByNumberCommand extends AbstractCommand {
         }
 
         Optional<Lesson> lessonOptional = lessonService.findByNumber(getLessonNumber(userMessage));
+        userMessage.setPreviousCommandName(LESSONS_MENU);
+        saveSession(userMessage);
         if (lessonOptional.isPresent()) {
             return getCustomTextButtonMessage(userMessage, getLessonString(lessonOptional.get()));
         } else {
-            userMessage.setPreviousCommandName(LESSONS_MENU);
-            saveSession(userMessage);
             return getCustomTextButtonMessage(userMessage, "Урок с таким номером не найден!");
         }
     }

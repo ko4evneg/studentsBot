@@ -12,13 +12,13 @@ import ru.trainithard.pollerbot.service.validator.ButtonVersionValidator;
 @Component
 @RequiredArgsConstructor
 public class CallbackMessageHandler extends MessageHandler {
-    private final ButtonVersionValidator validator;
+    private final ButtonVersionValidator buttonVersionValidator;
 
     @Override
     public BotApiMethodMessage handle(Update update) {
         UserMessage userMessage = createUserMessage(update);
         Session session = userMessage.getSession();
-        if (!validator.validate(userMessage)) {
+        if (!buttonVersionValidator.validate(userMessage)) {
             return commands.get(userMessage.getStartCommand()).execute(userMessage);
         }
 

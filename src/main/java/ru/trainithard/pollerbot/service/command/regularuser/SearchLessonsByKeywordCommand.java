@@ -31,9 +31,9 @@ public class SearchLessonsByKeywordCommand extends AbstractCommand {
         }
 
         List<Lesson> lessons = lessonService.findByKeyword(userMessage.getMessage());
+        userMessage.setPreviousCommandName(LESSONS_MENU);
+        saveSession(userMessage);
         if (lessons.isEmpty()) {
-            userMessage.setPreviousCommandName(LESSONS_MENU);
-            saveSession(userMessage);
             return getCustomTextButtonMessage(userMessage, "Урок с таким ключевым словом не найден!");
         } else {
             return getCustomTextButtonMessage(userMessage, getAllLessonsString(lessons));

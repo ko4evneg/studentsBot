@@ -34,12 +34,15 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
         putButtonedReply(USER_GET_DATA, getArrayOf("Ваши данные", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
         putButtonedReply(LESSONS_MENU, getArrayOf("Выберите действие:", ""),
-                List.of(List.of(new Button("Показать последние уроки", RECENT_LESSONS)),
-                        List.of(new Button("Поиск по номеру", SEARCH_LESSON_BY_NUMBER),
-                                new Button("Поиск по ключевому слову", SEARCH_LESSON_BY_KEYWORD))));
+                List.of(List.of(new Button("Показать последние уроки", RECENT_LESSONS),
+                        new Button("Поиск по номеру", SEARCH_LESSON_BY_NUMBER)),
+                        List.of(new Button("Поиск по ключевому слову", SEARCH_LESSON_BY_KEYWORD),
+                        new Button("Все ключевые слова", SHOW_ALL_KEYWORDS))));
+        putButtonedReply(SHOW_ALL_KEYWORDS, getArrayOf("Доступные ключевые слова:\r\n"),
+                List.of(List.of(new Button("В меню", USER_GET_MENU), new Button("Найти по слову", SEARCH_LESSON_BY_KEYWORD))));
         putButtonedReply(SEARCH_LESSON_BY_NUMBER, getArrayOf("Введите номер урока:", "Необходимо ввести число, попробуйте еще раз:"),
                 List.of(List.of(new Button("В меню", USER_GET_MENU), new Button("Найти еще раз", SEARCH_LESSON_BY_NUMBER))));
-        putButtonedReply(SEARCH_LESSON_BY_KEYWORD, getArrayOf("Введите ключевое слово:", "Необходимо ввести ключевое слово, попробуйте еще ра:!"),
+        putButtonedReply(SEARCH_LESSON_BY_KEYWORD, getArrayOf("Введите ключевое слово:", "Необходимо ввести ключевое слово, попробуйте еще рaз!"),
                 List.of(List.of(new Button("В меню", USER_GET_MENU), new Button("Найти еще раз", SEARCH_LESSON_BY_KEYWORD))));
         putButtonedReply(RECENT_LESSONS, getArrayOf("Список последних уроков:", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
@@ -61,7 +64,7 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
         putTextReply(DELEVATE, "De-elevation successful", "No rights for de-elevation");
     }
 
-    private void putTextReply(CommandName notifyAll, String...replyTexts) {
+    private void putTextReply(CommandName notifyAll, String... replyTexts) {
         replies.put(notifyAll, replyTexts);
     }
 

@@ -10,4 +10,7 @@ import java.util.List;
 public interface LessonsRepository extends JpaRepository<Lesson, Integer> {
     @Query(value = "SELECT l FROM Lesson l WHERE :keyword member of l.keywords")
     List<Lesson> findByKeyword(@Param("keyword") String keyword);
+
+    @Query(value = "SELECT keyword FROM Keywords", nativeQuery = true)
+    List<String> findAllKeywords();
 }

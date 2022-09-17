@@ -11,4 +11,6 @@ public interface LessonService {
     Optional<Lesson> findByNumber(int number);
 
     List<Lesson> findByKeyword(String keyword);
+
+    List<String> findAllKeywords();
 }

@@ -10,8 +10,8 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
 @NoArgsConstructor
+@Table(name = "users")
 public class User extends BaseEntity {
     @Column(name = "first_name")
     private String firstName;

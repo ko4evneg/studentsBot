@@ -1,6 +1,6 @@
 package ru.trainithard.pollerbot.service;
 
-import org.springframework.context.annotation.Lazy;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -8,14 +8,10 @@ import ru.trainithard.pollerbot.exception.PollerBotException;
 import ru.trainithard.pollerbot.model.Role;
 
 @Service
+@RequiredArgsConstructor
 public class NotificationService {
-    private PollerBot pollerBot;
-    private UserService userService;
-
-    public NotificationService(@Lazy PollerBot pollerBot, UserService userService) {
-        this.pollerBot = pollerBot;
-        this.userService = userService;
-    }
+    private final UserService userService;
+    private final PollerBotProxy pollerBot;
 
     public void notifyAll(String messageText) {
         userService.getAllChatIds()

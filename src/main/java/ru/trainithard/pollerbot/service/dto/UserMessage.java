@@ -19,6 +19,10 @@ public class UserMessage {
         return user.getChatId();
     }
 
+    public Long getUserId() {
+        return user.getId();
+    }
+
     public String getMessage() {
         return update.getMessage().getText();
     }

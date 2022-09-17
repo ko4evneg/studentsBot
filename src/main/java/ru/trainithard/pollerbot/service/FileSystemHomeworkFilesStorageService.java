@@ -20,7 +20,7 @@ public class FileSystemHomeworkFilesStorageService implements HomeworkFilesStora
 
     @Override
     public void save(UserMessage userMessage) throws TelegramApiException, IOException {
-        File destinationFile = new File(storageDirectory + "/" + getNickName(userMessage) + "/" + getDocument(userMessage).getFileName());
+        File destinationFile = new File(storageDirectory + "/" + userMessage.getUserId() + "/" + getDocument(userMessage).getFileName());
         Files.createParentDirs(destinationFile);
         try (BufferedOutputStream outputStream = getBufferedOutputStream(destinationFile)) {
             org.telegram.telegrambots.meta.api.objects.File file = pollerBot.execute(getGetFile(getDocument(userMessage)));
@@ -31,10 +31,6 @@ public class FileSystemHomeworkFilesStorageService implements HomeworkFilesStora
 
     private Document getDocument(UserMessage userMessage) {
         return userMessage.getUpdate().getMessage().getDocument();
-    }
-
-    private String getNickName(UserMessage userMessage) {
-        return userMessage.getUser().getNickName();
     }
 
     private BufferedOutputStream getBufferedOutputStream(File destinationFile) throws FileNotFoundException {

@@ -18,6 +18,9 @@ public class Lesson {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "url")
+    private String url;
+
     @ElementCollection
     @CollectionTable(name = "keywords", joinColumns = {@JoinColumn(name = "lesson_number")})
     @Column(name="keyword")

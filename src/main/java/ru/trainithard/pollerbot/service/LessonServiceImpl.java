@@ -7,6 +7,7 @@ import ru.trainithard.pollerbot.repository.LessonsRepository;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,5 +20,10 @@ public class LessonServiceImpl implements LessonService {
                 .sorted(Comparator.comparing(Lesson::getNumber).reversed())
                 .limit(count)
                 .toList();
+    }
+
+    @Override
+    public Optional<Lesson> findByNumber(int number) {
+        return repository.findById(number);
     }
 }

@@ -6,8 +6,8 @@ import ru.trainithard.pollerbot.service.command.CommandName;
 
 @Setter
 public class Session {
-    protected CommandName previousCommandName;
-    protected CommandName nextCommandName;
+    private CommandName previousCommandName;
+    private CommandName nextCommandName;
     @Getter
     private Role role;
 

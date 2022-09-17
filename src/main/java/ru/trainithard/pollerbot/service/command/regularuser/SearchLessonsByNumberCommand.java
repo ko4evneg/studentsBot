@@ -22,7 +22,8 @@ public class SearchLessonsByNumberCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
-            return saveSessionPreviousCommandAndGetReply(userMessage);
+            saveSessionPreviousCommand(userMessage);
+            return getTextMessage(userMessage);
         }
 
         if (!validateInputIsNumber(userMessage)) {

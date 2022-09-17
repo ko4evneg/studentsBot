@@ -17,7 +17,8 @@ public class NotifyConstructCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
-            return saveSessionPreviousCommandAndGetReply(userMessage);
+            saveSessionPreviousCommand(userMessage);
+            return getTextMessage(userMessage);
         }
 
         userMessage.getSession().setNextCommandName(CommandName.NOTIFY_ALL);

@@ -18,7 +18,7 @@ import static ru.trainithard.pollerbot.service.command.CommandName.SHOW_ALL_KEYW
 @Component
 @RequiredArgsConstructor
 public class ShowAllKeywordsCommand extends AbstractCommand {
-    public static final int OUTPUT_COLUMNS = 5;
+    private static final int OUTPUT_COLUMNS = 5;
     private final LessonService lessonService;
     private final ColumnOutputFormatter columnOutputFormatter;
 

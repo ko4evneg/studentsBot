@@ -8,7 +8,8 @@ import ru.trainithard.pollerbot.service.dto.UserMessage;
 public class HelpCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        return saveSessionPreviousCommandAndGetReply(userMessage);
+        saveSessionPreviousCommand(userMessage);
+        return getTextMessage(userMessage);
     }
 
     @Override

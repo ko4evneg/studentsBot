@@ -62,12 +62,12 @@ public abstract class AbstractCommand {
     }
 
     protected SendMessage getTextMessage(UserMessage userMessage) {
-        return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.getText(getCommandName()));
+        return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.findText(getCommandName()));
     }
 
     protected SendMessage getTextButtonMessage(UserMessage userMessage) {
         return messageConstructor.constructTextButtons(userMessage.getChatId(),
-                commandNameReplyRepository.getText(getCommandName()), getEnrichedVersionButtons(userMessage.getSessionVersion()));
+                commandNameReplyRepository.findText(getCommandName()), getEnrichedVersionButtons(userMessage.getSessionVersion()));
     }
 
     protected SendMessage getCustomTextButtonMessage(UserMessage userMessage, String text) {
@@ -76,7 +76,7 @@ public abstract class AbstractCommand {
     }
 
     private List<List<MessageConstructor.Button>> getEnrichedVersionButtons(long sessionVersion) {
-        return buttonVersionEnricher.enrich(commandNameReplyRepository.getButtons(getCommandName()), sessionVersion);
+        return buttonVersionEnricher.enrich(commandNameReplyRepository.findButtons(getCommandName()), sessionVersion);
     }
 
     protected SendMessage getCustomTextMessage(UserMessage userMessage, String text) {
@@ -84,7 +84,7 @@ public abstract class AbstractCommand {
     }
 
     protected SendMessage getErrorMessage(UserMessage userMessage) {
-        return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.getErrorText(getCommandName()));
+        return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.findErrorText(getCommandName()));
     }
 
     protected User getUser(UserMessage userMessage) {

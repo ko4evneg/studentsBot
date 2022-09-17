@@ -16,17 +16,17 @@ public class DataJpaUserRepositoryAdapter implements UserRepository {
     private final DataJpaUserRepository repository;
 
     @Override
-    public Optional<User> get(Long id) {
+    public Optional<User> find(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public Collection<User> getAll() {
+    public Collection<User> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public List<User> getByRole(Role role) {
+    public List<User> findByRole(Role role) {
         return repository.findByRole(role);
     }
 
@@ -36,7 +36,7 @@ public class DataJpaUserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public List<Long> getAllChatIds() {
+    public List<Long> findAllChatIds() {
         return repository.findAllChatIds();
     }
 }

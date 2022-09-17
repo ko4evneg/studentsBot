@@ -15,24 +15,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User find(Long userId) {
-        return repository.get(userId)
+        return repository.find(userId)
                 .orElse(new User(userId));
     }
 
     @Override
     public List<User> findAll() {
-        return repository.getAll()
+        return repository.findAll()
                 .stream().toList();
     }
 
     @Override
     public List<User> findByRole(Role role) {
-        return repository.getByRole(role);
+        return repository.findByRole(role);
     }
 
     @Override
     public List<Long> findAllChatIds(){
-        return repository.getAllChatIds();
+        return repository.findAllChatIds();
     }
 
     @Override

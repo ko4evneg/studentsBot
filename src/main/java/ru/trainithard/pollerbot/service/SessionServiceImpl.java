@@ -14,7 +14,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Optional<Session> find(Long userId) {
-        return repository.get(userId);
+        return repository.find(userId);
     }
 
     @Override

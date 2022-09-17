@@ -12,7 +12,7 @@ public class InMemorySessionRepository implements SessionRepository {
     private final Map<Long, Session> userStates = new HashMap<>();
 
     @Override
-    public Optional<Session> get(Long userId) {
+    public Optional<Session> find(Long userId) {
         return Optional.ofNullable(userStates.get(userId));
     }
 

@@ -9,17 +9,17 @@ public class InMemoryUserRepository implements UserRepository {
     private final Map<Long, User> users = new HashMap<>();
 
     @Override
-    public Optional<User> get(Long id) {
+    public Optional<User> find(Long id) {
         return Optional.ofNullable(users.get(id));
     }
 
     @Override
-    public Collection<User> getAll() {
+    public Collection<User> findAll() {
         return users.values();
     }
 
     @Override
-    public List<User> getByRole(Role role) {
+    public List<User> findByRole(Role role) {
         return users.values().stream()
                 .filter(user -> role.equals(user.getRole()))
                 .toList();
@@ -31,7 +31,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public List<Long> getAllChatIds() {
+    public List<Long> findAllChatIds() {
         return users.values().stream()
                 .map(User::getChatId)
                 .toList();

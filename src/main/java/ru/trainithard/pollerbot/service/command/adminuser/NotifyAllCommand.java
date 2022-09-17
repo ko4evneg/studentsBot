@@ -25,7 +25,7 @@ public class NotifyAllCommand extends AbstractCommand {
         } catch (PollerBotException e) {
             return getErrorMessage(userMessage);
         } finally {
-            getSession(userMessage).setPreviousNextCommandNames(getCommandName(), ADMIN_GET_MENU);
+            userMessage.setPreviousNextCommandNames(getCommandName(), ADMIN_GET_MENU);
             saveSession(userMessage);
         }
     }

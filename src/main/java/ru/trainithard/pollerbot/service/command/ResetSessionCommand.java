@@ -11,7 +11,7 @@ public class ResetSessionCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         userMessage.setUser(getFreshUser(userMessage));
-        getSession(userMessage).reset();
+        userMessage.getSession().reset();
         saveSession(userMessage);
         return getTextMessage(userMessage);
     }

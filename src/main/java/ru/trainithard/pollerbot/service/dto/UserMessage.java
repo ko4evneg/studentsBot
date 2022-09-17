@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.api.objects.Document;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.trainithard.pollerbot.model.Session;
 import ru.trainithard.pollerbot.model.User;
+import ru.trainithard.pollerbot.service.command.CommandName;
 
 @Getter
 @Setter
@@ -59,5 +60,17 @@ public class UserMessage {
 
     public Document getFile() {
         return getUpdate().getMessage().getDocument();
+    }
+
+    public void setNextCommandName(CommandName nextCommandName) {
+        session.setNextCommandName(nextCommandName);
+    }
+
+    public void setPreviousCommandName(CommandName previousCommandName) {
+        session.setPreviousCommandName(previousCommandName);
+    }
+
+    public void setPreviousNextCommandNames(CommandName previousCommandName, CommandName nextCommandName) {
+        session.setPreviousNextCommandNames(previousCommandName, nextCommandName);
     }
 }

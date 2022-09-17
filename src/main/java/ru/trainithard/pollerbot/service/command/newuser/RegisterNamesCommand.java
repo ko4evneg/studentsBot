@@ -19,7 +19,7 @@ public class RegisterNamesCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
-            getSession(userMessage).setPreviousCommandName(getCommandName());
+            userMessage.setPreviousCommandName(getCommandName());
             saveSession(userMessage);
             return getTextMessage(userMessage);
         }
@@ -27,7 +27,7 @@ public class RegisterNamesCommand extends AbstractCommand {
         if (!validator.validate(userMessage.getMessage())) {
             return getErrorMessage(userMessage);
         } else {
-            getSession(userMessage).setNextCommandName(CommandName.REGISTER_EMAIL);
+            userMessage.setNextCommandName(CommandName.REGISTER_EMAIL);
             getUser(userMessage).setFirstName(getFirstName(userMessage));
             getUser(userMessage).setLastName(getLastName(userMessage));
             getUser(userMessage).setNickName(getNickName(userMessage));

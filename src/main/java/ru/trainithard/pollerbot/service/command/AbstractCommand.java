@@ -3,7 +3,6 @@ package ru.trainithard.pollerbot.service.command;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import ru.trainithard.pollerbot.model.Session;
 import ru.trainithard.pollerbot.model.User;
 import ru.trainithard.pollerbot.repository.CommandNameReplyRepository;
 import ru.trainithard.pollerbot.service.SessionService;
@@ -42,11 +41,6 @@ public abstract class AbstractCommand {
 
     protected boolean isFirstInvocation(UserMessage userMessage) {
         return userMessage.getSession().getPreviousCommandName() != getCommandName();
-    }
-
-    protected UserMessage shiftSessionToThisCommand(UserMessage userMessage) {
-        getSession(userMessage).setPreviousCommandName(getCommandName());
-        return userMessage;
     }
 
     protected void saveUserSession(UserMessage userMessage) {
@@ -90,9 +84,5 @@ public abstract class AbstractCommand {
 
     protected User getFreshUser(UserMessage userMessage) {
         return userService.get(userMessage.getUserId());
-    }
-
-    protected Session getSession(UserMessage userMessage) {
-        return userMessage.getSession();
     }
 }

@@ -25,7 +25,7 @@ public class UploadHomeworkCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
-            getSession(userMessage).setPreviousCommandName(getCommandName());
+            userMessage.setPreviousCommandName(getCommandName());
             saveSession(userMessage);
             return getTextMessage(userMessage);
         }
@@ -34,7 +34,7 @@ public class UploadHomeworkCommand extends AbstractCommand {
         } else {
             try {
                 storageService.save(userMessage);
-                getSession(userMessage).setNextCommandName(CommandName.FINISH_UPLOAD_HOMEWORK);
+                userMessage.setNextCommandName(CommandName.FINISH_UPLOAD_HOMEWORK);
                 saveSession(userMessage);
                 notificationService.notifyAdmins(getNotifyMessage(userMessage));
                 return finishUploadHomeworkCommand.execute(userMessage);

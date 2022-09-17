@@ -17,7 +17,7 @@ public class RegisterEmailCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
-            getSession(userMessage).setPreviousCommandName(getCommandName());
+            userMessage.setPreviousCommandName(getCommandName());
             saveSession(userMessage);
             return getTextMessage(userMessage);
         }
@@ -26,7 +26,7 @@ public class RegisterEmailCommand extends AbstractCommand {
             return getErrorMessage(userMessage);
         } else {
             getUser(userMessage).setEmail(userMessage.getMessage());
-            getSession(userMessage).setNextCommandName(CommandName.FINISH_REGISTRATION);
+            userMessage.setNextCommandName(CommandName.FINISH_REGISTRATION);
             saveUserSession(userMessage);
             return finishRegistrationCommand.execute(userMessage);
         }

@@ -6,13 +6,13 @@ import ru.trainithard.pollerbot.model.User;
 import java.util.List;
 
 public interface UserService {
-    User get(Long userId);
+    User find(Long userId);
 
-    List<User> getAll();
+    List<User> findAll();
 
-    List<User> getByRole(Role role);
+    List<User> findByRole(Role role);
 
-    List<Long> getAllChatIds();
+    List<Long> findAllChatIds();
 
     void save(User user);
 }

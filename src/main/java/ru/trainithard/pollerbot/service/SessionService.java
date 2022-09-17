@@ -5,7 +5,7 @@ import ru.trainithard.pollerbot.model.Session;
 import java.util.Optional;
 
 public interface SessionService {
-    Optional<Session> get(Long userId);
+    Optional<Session> find(Long userId);
 
     void save(Long userId, Session session);
 }

@@ -67,17 +67,17 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
     }
 
     @Override
-    public String getText(CommandName commandName) {
+    public String findText(CommandName commandName) {
         return replies.get(commandName)[0];
     }
 
     @Override
-    public String getErrorText(CommandName commandName) {
+    public String findErrorText(CommandName commandName) {
         return replies.get(commandName)[1];
     }
 
     @Override
-    public List<List<Button>> getButtons(CommandName commandName) {
+    public List<List<Button>> findButtons(CommandName commandName) {
         return buttons.get(commandName);
     }
 }

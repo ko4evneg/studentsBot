@@ -6,9 +6,9 @@ import ru.trainithard.pollerbot.util.MessageConstructor;
 import java.util.List;
 
 public interface CommandNameReplyRepository {
-    String getText(CommandName commandName);
+    String findText(CommandName commandName);
 
-    String getErrorText(CommandName commandName);
+    String findErrorText(CommandName commandName);
 
-    List<List<MessageConstructor.Button>> getButtons(CommandName commandName);
+    List<List<MessageConstructor.Button>> findButtons(CommandName commandName);
 }

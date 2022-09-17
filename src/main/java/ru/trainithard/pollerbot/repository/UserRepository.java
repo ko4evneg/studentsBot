@@ -8,13 +8,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
-    Optional<User> get(Long id);
+    Optional<User> find(Long id);
 
-    Collection<User> getAll();
+    Collection<User> findAll();
 
-    List<User> getByRole(Role role);
+    List<User> findByRole(Role role);
 
     User save(User user);
 
-    List<Long> getAllChatIds();
+    List<Long> findAllChatIds();
 }

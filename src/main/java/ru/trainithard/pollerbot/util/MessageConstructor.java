@@ -1,5 +1,8 @@
 package ru.trainithard.pollerbot.util;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -47,7 +50,7 @@ public class MessageConstructor {
     private InlineKeyboardButton createButton(Button button) {
         return InlineKeyboardButton.builder()
                 .text(button.text())
-                .callbackData(button.commandName().toString())
+                .callbackData(button.commandName().toString() + "___" + button.version())
                 .build();
     }
 
@@ -55,6 +58,27 @@ public class MessageConstructor {
         return construct(chatId, exception.getMessage());
     }
 
-    public record Button(String text, CommandName commandName) {
+    @Setter
+    public static class Button {
+        private String text;
+        private CommandName commandName;
+        private long version;
+
+        public Button(String text, CommandName commandName) {
+            this.text = text;
+            this.commandName = commandName;
+        }
+
+        public String text() {
+            return text;
+        }
+
+        public CommandName commandName() {
+            return commandName;
+        }
+
+        public long version() {
+            return version;
+        }
     }
 }

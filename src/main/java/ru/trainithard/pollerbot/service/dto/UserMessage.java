@@ -43,7 +43,7 @@ public class UserMessage {
 
     public String getEmailInFileFormat() {
         String email = getEmail().replace("@", "_");
-        return email.replaceFirst("\\.\\D+$", "");
+        return email.replaceAll("\\.\\D+$", "");
     }
 
     public String getMessage() {
@@ -72,5 +72,13 @@ public class UserMessage {
 
     public void setPreviousNextCommandNames(CommandName previousCommandName, CommandName nextCommandName) {
         session.setPreviousNextCommandNames(previousCommandName, nextCommandName);
+    }
+
+    public long getSessionVersion() {
+        return session.getVersion();
+    }
+
+    public CommandName getStartCommand() {
+        return user.getRole().getStartCommand();
     }
 }

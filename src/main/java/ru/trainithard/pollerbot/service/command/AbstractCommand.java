@@ -7,8 +7,11 @@ import ru.trainithard.pollerbot.model.User;
 import ru.trainithard.pollerbot.repository.CommandNameReplyRepository;
 import ru.trainithard.pollerbot.service.SessionService;
 import ru.trainithard.pollerbot.service.UserService;
+import ru.trainithard.pollerbot.service.component.ButtonVersionEnricher;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 import ru.trainithard.pollerbot.util.MessageConstructor;
+
+import java.util.List;
 
 public abstract class AbstractCommand {
     @Autowired
@@ -19,6 +22,8 @@ public abstract class AbstractCommand {
     protected SessionService sessionService;
     @Autowired
     protected CommandNameReplyRepository commandNameReplyRepository;
+    @Autowired
+    protected ButtonVersionEnricher buttonVersionEnricher;
 
     /**
      * Executes command based on UserMessage data.
@@ -62,12 +67,16 @@ public abstract class AbstractCommand {
 
     protected SendMessage getTextButtonMessage(UserMessage userMessage) {
         return messageConstructor.constructTextButtons(userMessage.getChatId(),
-                commandNameReplyRepository.getText(getCommandName()), commandNameReplyRepository.getButtons(getCommandName()));
+                commandNameReplyRepository.getText(getCommandName()), getEnrichedVersionButtons(userMessage.getSessionVersion()));
     }
 
     protected SendMessage getCustomTextButtonMessage(UserMessage userMessage, String text) {
         return messageConstructor.constructTextButtons(userMessage.getChatId(), text,
-                commandNameReplyRepository.getButtons(getCommandName()));
+                getEnrichedVersionButtons(userMessage.getSessionVersion()));
+    }
+
+    private List<List<MessageConstructor.Button>> getEnrichedVersionButtons(long sessionVersion) {
+        return buttonVersionEnricher.enrich(commandNameReplyRepository.getButtons(getCommandName()), sessionVersion);
     }
 
     protected SendMessage getCustomTextMessage(UserMessage userMessage, String text) {

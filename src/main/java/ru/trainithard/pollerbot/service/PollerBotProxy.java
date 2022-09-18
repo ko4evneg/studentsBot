@@ -3,7 +3,9 @@ package ru.trainithard.pollerbot.service;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.objects.File;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.Serializable;
@@ -20,5 +22,9 @@ public class PollerBotProxy {
 
     public final java.io.File downloadFile(File file) throws TelegramApiException {
         return pollerBot.downloadFile(file);
+    }
+
+    public final Message execute(SendDocument sendDocument) throws TelegramApiException {
+        return pollerBot.execute(sendDocument);
     }
 }

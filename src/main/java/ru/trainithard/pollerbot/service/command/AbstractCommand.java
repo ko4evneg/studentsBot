@@ -12,6 +12,8 @@ import ru.trainithard.pollerbot.util.MessageConstructor;
 
 import java.util.List;
 
+import static ru.trainithard.pollerbot.util.MessageConstructor.*;
+
 public abstract class AbstractCommand {
     @Autowired
     protected MessageConstructor messageConstructor;
@@ -78,7 +80,12 @@ public abstract class AbstractCommand {
                 getCommandNameButtons());
     }
 
-    private List<List<MessageConstructor.Button>> getCommandNameButtons() {
+    protected SendMessage getCustomButtonTextMessage(UserMessage userMessage, List<List<Button>> buttons) {
+        return messageConstructor.constructTextButtons(userMessage,
+                commandNameReplyRepository.findText(getCommandName()), buttons);
+    }
+
+    private List<List<Button>> getCommandNameButtons() {
         return commandNameReplyRepository.findButtons(getCommandName());
     }
 

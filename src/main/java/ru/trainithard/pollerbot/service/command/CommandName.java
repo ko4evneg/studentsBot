@@ -27,6 +27,8 @@ public enum CommandName {
     ADMIN_GET_MENU,
     NOTIFY_ALL,
     CONSTRUCT_NOTIFICATION,
+    LIST_HOMEWORKS_FOLDERS,
+    DOWNLOAD_HOMEWORK,
 
     HELP("/help"),
     RESET_SESSION("/reset"),

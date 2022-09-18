@@ -35,7 +35,7 @@ class StringMetaDataManagerTest {
     @Test
     void testGetStringMetaData() {
         String testSourceData = "ABC_DEF{\"somekey\":\"someval\",\"someIntVal\":\"235\"}";
-        String metaDataValue = metaDataManager.getMetaData(testSourceData, "somekey");
+        String metaDataValue = metaDataManager.getMetaDataValue(testSourceData, "somekey");
 
         assertEquals("someval", metaDataValue);
     }

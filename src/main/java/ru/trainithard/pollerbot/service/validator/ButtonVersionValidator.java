@@ -16,6 +16,6 @@ public class ButtonVersionValidator {
     }
 
     private String getVersion(UserMessage userMessage) {
-        return metaDataManager.getMetaData(userMessage.getCallbackData(), "version");
+        return metaDataManager.getMetaDataValue(userMessage.getCallbackData(), "v");
     }
 }

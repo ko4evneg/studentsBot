@@ -14,7 +14,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class SessionRetriever {
-    public static final int SESSION_TIMEOUT_MINUTES = 7;
+    private static final int SESSION_TIMEOUT_MINUTES = 7;
     private final SessionService sessionService;
     private final UserService userService;
 

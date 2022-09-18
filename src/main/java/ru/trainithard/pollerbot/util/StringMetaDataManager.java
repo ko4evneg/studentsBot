@@ -60,7 +60,7 @@ public class StringMetaDataManager {
         return source.concat(newMetaData);
     }
 
-    public String getMetaData(String source, String metaKey) {
+    public String getMetaDataValue(String source, String metaKey) {
         try {
             Map<String, Object> metaDataMap = getMetaDataMap(getMetaData(source));
             return metaDataMap.get(metaKey).toString();

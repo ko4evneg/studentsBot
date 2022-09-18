@@ -54,8 +54,10 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
 
         //admin texts
         putButtonedReply(ADMIN_GET_MENU, getArrayOf("ADMIN MENU:", ""),
-                List.of(List.of(new Button("Notify all", CONSTRUCT_NOTIFICATION))));
+                List.of(List.of(new Button("Notify all", CONSTRUCT_NOTIFICATION), new Button("Download homework", LIST_HOMEWORKS_FOLDERS))));
         putTextReply(CONSTRUCT_NOTIFICATION, "Enter notification text:", "");
+        putTextReply(LIST_HOMEWORKS_FOLDERS, "Select student:", "");
+        putTextReply(DOWNLOAD_HOMEWORK, "Select homework:", "");
         putTextReply(NOTIFY_ALL, "Notification has been sent!", "Notification has failed!");
 
         //text commands

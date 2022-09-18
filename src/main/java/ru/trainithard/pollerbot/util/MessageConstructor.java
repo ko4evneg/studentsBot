@@ -58,7 +58,7 @@ public class MessageConstructor {
     }
 
     private String constructCommandWithVersionMetaData(UserMessage userMessage, Button button) {
-        return metaDataManager.addMetaData(button.commandName().toString(), "version", userMessage.getSessionVersion());
+        return metaDataManager.addMetaData(button.callbackData(), "v", userMessage.getSessionVersion());
     }
 
     public SendMessage constructError(Long chatId, PollerBotException exception) {
@@ -68,19 +68,24 @@ public class MessageConstructor {
     @Setter
     public static class Button {
         private String text;
-        private CommandName commandName;
+        private String callbackData;
 
-        public Button(String text, CommandName commandName) {
+        public Button(String text, CommandName callbackData) {
             this.text = text;
-            this.commandName = commandName;
+            this.callbackData = callbackData.toString();
+        }
+
+        public Button(String text, String callbackData) {
+            this.text = text;
+            this.callbackData = callbackData;
         }
 
         public String text() {
             return text;
         }
 
-        public CommandName commandName() {
-            return commandName;
+        public String callbackData() {
+            return callbackData;
         }
     }
 }

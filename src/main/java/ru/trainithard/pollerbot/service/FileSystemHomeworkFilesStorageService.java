@@ -10,6 +10,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 
 import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +43,28 @@ public class FileSystemHomeworkFilesStorageService implements HomeworkFilesStora
         GetFile getFile = new GetFile();
         getFile.setFileId(document.getFileId());
         return getFile;
+    }
+
+    @Override
+    public List<String> getStudentFolderNames() {
+        File homeworkRootDirectory = new File(storageDirectory);
+        File[] homeworkDirectories = homeworkRootDirectory.listFiles(File::isDirectory);
+        return Arrays.stream(homeworkDirectories)
+                .map(File::getName)
+                .toList();
+    }
+
+    @Override
+    public List<String> getStudentHomeworkFiles(String studentDirectoryName) {
+        File homeworkRootDirectory = new File(storageDirectory + "/" + studentDirectoryName);
+        File[] files = homeworkRootDirectory.listFiles();
+        return Arrays.stream(files)
+                .map(File::getName)
+                .toList();
+    }
+
+    @Override
+    public File getHomeworkFile(String homeworkFolder, String homeworkFile) {
+        return new File(storageDirectory + "/" + homeworkFolder + "/" + homeworkFile);
     }
 }

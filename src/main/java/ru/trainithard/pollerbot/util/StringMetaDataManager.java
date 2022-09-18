@@ -19,6 +19,10 @@ public class StringMetaDataManager {
     private final RegexChecker regexChecker;
     private final ObjectMapper mapper;
 
+    public String addMetaData(String source, String metaKey, Long longMetaValue) {
+        return addMetaData(source, metaKey, Long.toString(longMetaValue));
+    }
+
     public String addMetaData(String source, String metaKey, String metaValue) {
         try {
             if (hasMetaData(source)) {
@@ -76,4 +80,8 @@ public class StringMetaDataManager {
         }
     }
 
+    public String stripMetaData(String source) {
+        int metaDataStartIndex = source.indexOf(getMetaData(source));
+        return source.substring(0, metaDataStartIndex);
+    }
 }

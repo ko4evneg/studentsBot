@@ -8,14 +8,14 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import ru.trainithard.pollerbot.exception.PollerBotException;
 import ru.trainithard.pollerbot.service.command.CommandName;
-import ru.trainithard.pollerbot.service.component.ButtonVersionEnricher;
+import ru.trainithard.pollerbot.service.dto.UserMessage;
 
 import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class MessageConstructor {
-    private final ButtonVersionEnricher buttonVersionEnricher;
+    private final StringMetaDataManager metaDataManager;
 
     public SendMessage construct(Long chatId, String text) {
         return SendMessage.builder()
@@ -31,34 +31,34 @@ public class MessageConstructor {
                 .build();
     }
 
-    public SendMessage constructTextButtons(Long chatId, String text, List<List<Button>> buttons) {
-        SendMessage reply = construct(chatId, text);
-        reply.setReplyMarkup(createKeyboard(buttons));
+    public SendMessage constructTextButtons(UserMessage userMessage, String text, List<List<Button>> buttons) {
+        SendMessage reply = construct(userMessage.getChatId(), text);
+        reply.setReplyMarkup(createKeyboard(userMessage, buttons));
         return reply;
     }
 
-    private InlineKeyboardMarkup createKeyboard(List<List<Button>> buttons) {
+    private InlineKeyboardMarkup createKeyboard(UserMessage userMessage, List<List<Button>> buttons) {
         List<List<InlineKeyboardButton>> buttonLines = buttons.stream()
-                .map(this::createButtonsRow)
+                .map(buttonsRow -> createButtonsRow(userMessage, buttonsRow))
                 .toList();
         return InlineKeyboardMarkup.builder()
                 .keyboard(buttonLines)
                 .build();
     }
 
-    private List<InlineKeyboardButton> createButtonsRow(List<Button> buttons) {
-        return buttons.stream().map(this::createButton).toList();
+    private List<InlineKeyboardButton> createButtonsRow(UserMessage userMessage, List<Button> buttons) {
+        return buttons.stream().map(button -> createButton(userMessage, button)).toList();
     }
 
-    private InlineKeyboardButton createButton(Button button) {
+    private InlineKeyboardButton createButton(UserMessage userMessage, Button button) {
         return InlineKeyboardButton.builder()
                 .text(button.text())
-                .callbackData(button.commandName().toString() + "___" + button.version())
+                .callbackData(constructCommandWithVersionMetaData(userMessage, button))
                 .build();
     }
 
-    public List<List<MessageConstructor.Button>> getEnrichedVersionButtons(List<List<MessageConstructor.Button>> buttons, long sessionVersion) {
-        return buttonVersionEnricher.enrich(buttons, sessionVersion);
+    private String constructCommandWithVersionMetaData(UserMessage userMessage, Button button) {
+        return metaDataManager.addMetaData(button.commandName().toString(), "version", userMessage.getSessionVersion());
     }
 
     public SendMessage constructError(Long chatId, PollerBotException exception) {
@@ -69,7 +69,6 @@ public class MessageConstructor {
     public static class Button {
         private String text;
         private CommandName commandName;
-        private long version;
 
         public Button(String text, CommandName commandName) {
             this.text = text;
@@ -82,10 +81,6 @@ public class MessageConstructor {
 
         public CommandName commandName() {
             return commandName;
-        }
-
-        public long version() {
-            return version;
         }
     }
 }

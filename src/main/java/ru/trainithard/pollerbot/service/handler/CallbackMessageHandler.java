@@ -8,11 +8,13 @@ import ru.trainithard.pollerbot.model.Session;
 import ru.trainithard.pollerbot.service.command.CommandName;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 import ru.trainithard.pollerbot.service.validator.ButtonVersionValidator;
+import ru.trainithard.pollerbot.util.StringMetaDataManager;
 
 @Component
 @RequiredArgsConstructor
 public class CallbackMessageHandler extends MessageHandler {
     private final ButtonVersionValidator buttonVersionValidator;
+    private final StringMetaDataManager metaDataManager;
 
     @Override
     public BotApiMethodMessage handle(Update update) {
@@ -27,7 +29,7 @@ public class CallbackMessageHandler extends MessageHandler {
     }
 
     private CommandName getInvokedCommandName(UserMessage userMessage) {
-        return CommandName.getByName(userMessage.getCallbackData().split("___")[0]).get();
+        return CommandName.getByName(metaDataManager.stripMetaData(userMessage.getCallbackData())).get();
     }
 
     private UserMessage createUserMessage(Update update) {

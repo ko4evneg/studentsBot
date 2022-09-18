@@ -68,14 +68,14 @@ public abstract class AbstractCommand {
     }
 
     protected SendMessage getTextButtonMessage(UserMessage userMessage) {
-        return messageConstructor.constructTextButtons(userMessage.getChatId(),
+        return messageConstructor.constructTextButtons(userMessage,
                 commandNameReplyRepository.findText(getCommandName()),
-                messageConstructor.getEnrichedVersionButtons(getCommandNameButtons(), userMessage.getSessionVersion()));
+                getCommandNameButtons());
     }
 
     protected SendMessage getCustomTextButtonMessage(UserMessage userMessage, String text) {
-        return messageConstructor.constructTextButtons(userMessage.getChatId(), text,
-                messageConstructor.getEnrichedVersionButtons(getCommandNameButtons(), userMessage.getSessionVersion()));
+        return messageConstructor.constructTextButtons(userMessage, text,
+                getCommandNameButtons());
     }
 
     private List<List<MessageConstructor.Button>> getCommandNameButtons() {

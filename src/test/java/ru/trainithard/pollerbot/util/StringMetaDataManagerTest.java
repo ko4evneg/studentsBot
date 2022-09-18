@@ -54,4 +54,11 @@ class StringMetaDataManagerTest {
 
         assertThrows(PollerBotException.class, () -> metaDataManager.getLongMetaData(testSourceData, "someIntVal"));
     }
+
+    @Test
+    void testStripMetaDataSuccess() {
+        String testSourceData = "ABC_DEF{\"somekey\":\"someval\",\"someIntVal\":\"d235\"}";
+
+        assertEquals("ABC_DEF", metaDataManager.stripMetaData(testSourceData));
+    }
 }

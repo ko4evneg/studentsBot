@@ -4,17 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import ru.trainithard.pollerbot.model.User;
-import ru.trainithard.pollerbot.repository.CommandNameReplyRepository;
 import ru.trainithard.pollerbot.repository.MessageKeyboardRepository;
 import ru.trainithard.pollerbot.service.SessionService;
 import ru.trainithard.pollerbot.service.UserService;
 import ru.trainithard.pollerbot.service.dto.MessageKeyboard;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 import ru.trainithard.pollerbot.util.MessageConstructor;
-
-import java.util.List;
-
-import static ru.trainithard.pollerbot.util.MessageConstructor.Button;
 
 public abstract class AbstractCommand {
     @Autowired
@@ -23,8 +18,6 @@ public abstract class AbstractCommand {
     protected UserService userService;
     @Autowired
     protected SessionService sessionService;
-    @Autowired
-    protected CommandNameReplyRepository commandNameReplyRepository;
     @Autowired
     protected MessageKeyboardRepository messageKeyboardRepository;
 

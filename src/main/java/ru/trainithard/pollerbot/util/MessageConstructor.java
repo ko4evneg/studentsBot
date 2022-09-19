@@ -15,6 +15,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class MessageConstructor {
+    private final ButtonConstructor buttonConstructor;
     private final StringMetaDataManager metaDataManager;
 
     public SendMessage construct(Long chatId, String text) {
@@ -32,6 +33,13 @@ public class MessageConstructor {
     }
 
     public SendMessage constructTextButtons(UserMessage userMessage, String text, List<List<Button>> buttons) {
+        SendMessage reply = construct(userMessage.getChatId(), text);
+        reply.setReplyMarkup(createKeyboard(userMessage, buttons));
+        return reply;
+    }
+
+    public SendMessage constructTextButtons(UserMessage userMessage, String text, int[] buttonsMarkup, String...stringButtons) {
+        List<List<Button>> buttons = buttonConstructor.constructButtons(buttonsMarkup, stringButtons);
         SendMessage reply = construct(userMessage.getChatId(), text);
         reply.setReplyMarkup(createKeyboard(userMessage, buttons));
         return reply;

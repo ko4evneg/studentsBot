@@ -97,7 +97,7 @@ public abstract class AbstractCommand {
         return messageConstructor.constructText(userMessage.getChatId(), text);
     }
 
-    protected SendMessage getErrorMessage(UserMessage userMessage) {
+    protected SendMessage getErrorTextMessage(UserMessage userMessage) {
         return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.findErrorText(getCommandName()));
     }
 
@@ -111,5 +111,9 @@ public abstract class AbstractCommand {
 
     protected SendMessage getStandardMessage(UserMessage userMessage) {
         return messageConstructor.constructTextButtons(userMessage, messageKeyboardRepository.find(getCommandName()));
+    }
+
+    protected SendMessage getErrorMessage(UserMessage userMessage) {
+        return messageConstructor.constructErrorText(userMessage, messageKeyboardRepository.find(getCommandName()));
     }
 }

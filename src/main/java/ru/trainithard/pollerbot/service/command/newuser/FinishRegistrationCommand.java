@@ -24,7 +24,7 @@ public class FinishRegistrationCommand extends AbstractCommand {
         Session newSession = sessionRetriever.getNew(getUserId(userMessage));
         userMessage.setSession(newSession);
         saveSession(userMessage);
-        return getTextButtonMessage(userMessage);
+        return getStandardMessage(userMessage);
     }
 
 

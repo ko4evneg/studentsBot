@@ -40,10 +40,16 @@ public class MessageConstructor {
     }
 
     public SendMessage constructTextButtons(UserMessage userMessage, MessageKeyboard messageKeyboard) {
-        List<List<Button>> buttons = buttonConstructor.constructButtons(messageKeyboard);
         SendMessage reply = construct(userMessage.getChatId(), messageKeyboard.getMessageOne());
-        reply.setReplyMarkup(createKeyboard(userMessage, buttons));
+        if (messageKeyboard.hasButtons()) {
+            List<List<Button>> buttons = buttonConstructor.constructButtons(messageKeyboard);
+            reply.setReplyMarkup(createKeyboard(userMessage, buttons));
+        }
         return reply;
+    }
+
+    public SendMessage constructErrorText(UserMessage userMessage, MessageKeyboard messageKeyboard) {
+        return construct(userMessage.getChatId(), messageKeyboard.getMessageTwo());
     }
 
     private InlineKeyboardMarkup createKeyboard(UserMessage userMessage, List<List<Button>> buttons) {

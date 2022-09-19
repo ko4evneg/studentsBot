@@ -19,12 +19,6 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
 
     @PostConstruct
     public void fill() {
-        //new user texts
-        putTextReply(REGISTER_NAMES, "Укажите Имя и Фамилию (в таком же порядке): ", "Неверные Имя Фамилия, попробуйте еще раз:");
-        putTextReply(REGISTER_EMAIL, "Укажите email для связи: ", "Неверный email, попробуйте еще раз:");
-        putButtonedReply(FINISH_REGISTRATION, getArrayOf("Успешная регистрация!", ""),
-                List.of(List.of(new Button("В меню", USER_GET_MENU))));
-
         //regular user texts
         putButtonedReply(USER_GET_DATA, getArrayOf("Ваши данные", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));

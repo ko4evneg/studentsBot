@@ -8,6 +8,7 @@ import ru.trainithard.pollerbot.repository.CommandNameReplyRepository;
 import ru.trainithard.pollerbot.repository.MessageKeyboardRepository;
 import ru.trainithard.pollerbot.service.SessionService;
 import ru.trainithard.pollerbot.service.UserService;
+import ru.trainithard.pollerbot.service.dto.MessageKeyboard;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 import ru.trainithard.pollerbot.util.MessageConstructor;
 
@@ -68,39 +69,6 @@ public abstract class AbstractCommand {
         sessionService.save(userMessage.getUserId(), userMessage.getSession());
     }
 
-    protected SendMessage getTextMessage(UserMessage userMessage) {
-        return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.findText(getCommandName()));
-    }
-
-    protected SendMessage getTextButtonMessage(UserMessage userMessage) {
-        return messageConstructor.constructTextButtons(userMessage,
-                commandNameReplyRepository.findText(getCommandName()),
-                getCommandNameButtons());
-    }
-
-    protected SendMessage getCustomTextButtonMessage(UserMessage userMessage, String text) {
-        return messageConstructor.constructTextButtons(userMessage, text,
-                getCommandNameButtons());
-    }
-
-    protected SendMessage getCustomButtonTextMessage(UserMessage userMessage, List<List<Button>> buttons) {
-        return messageConstructor.constructTextButtons(userMessage,
-                commandNameReplyRepository.findText(getCommandName()), buttons);
-    }
-
-    private List<List<Button>> getCommandNameButtons() {
-        return commandNameReplyRepository.findButtons(getCommandName());
-    }
-
-
-    protected SendMessage getCustomTextMessage(UserMessage userMessage, String text) {
-        return messageConstructor.constructText(userMessage.getChatId(), text);
-    }
-
-    protected SendMessage getErrorTextMessage(UserMessage userMessage) {
-        return messageConstructor.constructText(userMessage.getChatId(), commandNameReplyRepository.findErrorText(getCommandName()));
-    }
-
     protected User getUser(UserMessage userMessage) {
         return userMessage.getUser();
     }
@@ -109,11 +77,28 @@ public abstract class AbstractCommand {
         return userService.find(userMessage.getUserId());
     }
 
+    protected SendMessage getCustomButtonTextMessage(UserMessage userMessage, List<List<Button>> buttons) {
+        return messageConstructor.constructTextButtons(userMessage,
+                commandNameReplyRepository.findText(getCommandName()), buttons);
+    }
+
+    protected SendMessage getStandardTextMessage(UserMessage userMessage) {
+        return messageConstructor.constructText(userMessage.getChatId(), getMessageKeyboard().getMessage());
+    }
+
+    private MessageKeyboard getMessageKeyboard() {
+        return messageKeyboardRepository.find(getCommandName());
+    }
+
     protected SendMessage getStandardMessage(UserMessage userMessage) {
-        return messageConstructor.constructTextButtons(userMessage, messageKeyboardRepository.find(getCommandName()));
+        return messageConstructor.constructTextButtons(userMessage, getMessageKeyboard());
     }
 
     protected SendMessage getErrorMessage(UserMessage userMessage) {
-        return messageConstructor.constructErrorText(userMessage, messageKeyboardRepository.find(getCommandName()));
+        return messageConstructor.constructErrorText(userMessage, getMessageKeyboard());
+    }
+
+    protected SendMessage getCustomMessage(UserMessage userMessage, String text) {
+        return messageConstructor.constructCustomTextButtons(userMessage, getMessageKeyboard(), text);
     }
 }

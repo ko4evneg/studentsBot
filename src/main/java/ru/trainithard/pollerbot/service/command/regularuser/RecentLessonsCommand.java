@@ -22,7 +22,7 @@ public class RecentLessonsCommand extends AbstractCommand {
     private final LessonService lessonService;
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        return getCustomTextButtonMessage(userMessage, composeLessonsMessage());
+        return getCustomMessage(userMessage, composeLessonsMessage());
     }
 
     private String composeLessonsMessage() {

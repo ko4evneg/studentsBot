@@ -7,10 +7,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static ru.trainithard.pollerbot.util.MessageConstructor.*;
+
 @Component
 public class ButtonConstructor {
-    public List<List<MessageConstructor.Button>> constructButtons(MessageKeyboard messageKeyboard) {
-        List<List<MessageConstructor.Button>> result = new ArrayList<>();
+
+    /**
+     * @param messageKeyboard which must contain row markup and strings of buttons
+     * @return List&lt;List&lt;Button&gt;&gt; list of rows, each row containing buttons
+     */
+    public List<List<Button>> constructButtons(MessageKeyboard messageKeyboard) {
+        List<List<Button>> result = new ArrayList<>();
 
         int endOfRowElementIndex = 0;
         for (int buttonsInRow : messageKeyboard.getButtonInRowsMarkup()) {
@@ -22,10 +29,10 @@ public class ButtonConstructor {
         return result;
     }
 
-    private List<MessageConstructor.Button> constructButtonsRow(String[] stringButtonsRow) {
-        List<MessageConstructor.Button> buttons = new ArrayList<>();
+    private List<Button> constructButtonsRow(String[] stringButtonsRow) {
+        List<Button> buttons = new ArrayList<>();
         for (int i = 0; i < stringButtonsRow.length; i += 2) {
-            buttons.add(new MessageConstructor.Button(stringButtonsRow[i], stringButtonsRow[i + 1]));
+            buttons.add(new Button(stringButtonsRow[i], stringButtonsRow[i + 1]));
         }
         return buttons;
     }

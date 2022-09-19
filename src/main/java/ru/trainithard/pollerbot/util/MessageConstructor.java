@@ -40,7 +40,7 @@ public class MessageConstructor {
     }
 
     public SendMessage constructTextButtons(UserMessage userMessage, MessageKeyboard messageKeyboard) {
-        SendMessage reply = construct(userMessage.getChatId(), messageKeyboard.getMessageOne());
+        SendMessage reply = construct(userMessage.getChatId(), messageKeyboard.getMessage());
         if (messageKeyboard.hasButtons()) {
             List<List<Button>> buttons = buttonConstructor.constructButtons(messageKeyboard);
             reply.setReplyMarkup(createKeyboard(userMessage, buttons));
@@ -49,7 +49,16 @@ public class MessageConstructor {
     }
 
     public SendMessage constructErrorText(UserMessage userMessage, MessageKeyboard messageKeyboard) {
-        return construct(userMessage.getChatId(), messageKeyboard.getMessageTwo());
+        return construct(userMessage.getChatId(), messageKeyboard.getErrorMessage());
+    }
+
+    public SendMessage constructCustomTextButtons(UserMessage userMessage, MessageKeyboard messageKeyboard, String text) {
+        SendMessage reply = construct(userMessage.getChatId(), text);
+        if (messageKeyboard.hasButtons()) {
+            List<List<Button>> buttons = buttonConstructor.constructButtons(messageKeyboard);
+            reply.setReplyMarkup(createKeyboard(userMessage, buttons));
+        }
+        return reply;
     }
 
     private InlineKeyboardMarkup createKeyboard(UserMessage userMessage, List<List<Button>> buttons) {
@@ -74,10 +83,6 @@ public class MessageConstructor {
 
     private String constructCommandWithVersionMetaData(UserMessage userMessage, Button button) {
         return metaDataManager.addMetaData(button.callbackData(), "v", userMessage.getSessionVersion());
-    }
-
-    public SendMessage constructError(Long chatId, PollerBotException exception) {
-        return construct(chatId, exception.getMessage());
     }
 
     @Setter

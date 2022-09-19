@@ -12,7 +12,7 @@ import static ru.trainithard.pollerbot.service.command.CommandName.LESSONS_MENU;
 public class LessonsMenuCommand extends StartRoleCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        return getTextButtonMessage(userMessage);
+        return getStandardMessage(userMessage);
     }
 
     @Override

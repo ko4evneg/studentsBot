@@ -26,6 +26,9 @@ public class ColumnOutputFormatter {
     }
 
     private int getNumberOfWordsInColumn(String[] keywords, int columns) {
+        if (keywords.length <= columns) {
+            return keywords.length;
+        }
         return Double.valueOf(
                 Math.ceil(keywords.length / (double) columns))
                 .intValue();

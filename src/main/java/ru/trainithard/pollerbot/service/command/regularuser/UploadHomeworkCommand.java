@@ -26,7 +26,7 @@ public class UploadHomeworkCommand extends AbstractCommand {
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
             saveSessionPreviousCommand(userMessage);
-            return getTextMessage(userMessage);
+            return getStandardMessage(userMessage);
         }
         if (!validator.validate(userMessage)) {
             return getErrorMessage(userMessage);
@@ -38,7 +38,7 @@ public class UploadHomeworkCommand extends AbstractCommand {
                 notificationService.notifyAdmins(getNotifyMessage(userMessage));
                 return finishUploadHomeworkCommand.execute(userMessage);
             } catch (TelegramApiException | IOException e) {
-                return getCustomTextMessage(userMessage, "Ошибка сохранения файла: " + e.getMessage());
+                return getCustomMessage(userMessage, "Ошибка сохранения файла: " + e.getMessage());
             }
         }
     }

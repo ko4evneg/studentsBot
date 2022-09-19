@@ -24,7 +24,7 @@ public class SearchLessonsByKeywordCommand extends AbstractCommand {
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
             saveSessionPreviousCommand(userMessage);
-            return getTextMessage(userMessage);
+            return getStandardTextMessage(userMessage);
         }
 
         if (!validateInputIsSingleWord(userMessage)) {
@@ -35,9 +35,9 @@ public class SearchLessonsByKeywordCommand extends AbstractCommand {
         userMessage.setPreviousCommandName(LESSONS_MENU);
         saveSession(userMessage);
         if (lessons.isEmpty()) {
-            return getCustomTextButtonMessage(userMessage, "Урок с таким ключевым словом не найден!");
+            return getCustomMessage(userMessage, "Урок с таким ключевым словом не найден!");
         } else {
-            return getCustomTextButtonMessage(userMessage, getAllLessonsString(lessons));
+            return getCustomMessage(userMessage, getAllLessonsString(lessons));
         }
     }
 

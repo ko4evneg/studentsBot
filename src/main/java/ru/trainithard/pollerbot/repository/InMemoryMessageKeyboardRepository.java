@@ -29,6 +29,24 @@ public class InMemoryMessageKeyboardRepository implements MessageKeyboardReposit
         putTextButton(USER_GET_MENU, getMessage("МЕНЮ"), getMarkup(2, 1),
                 "Мои данные", USER_GET_DATA.toString(), "Уроки", LESSONS_MENU.toString(),
                 "Загрузить домашнее задание", USER_UPLOAD_HOMEWORK.toString());
+        putTextButton(USER_GET_DATA, getMessage("Ваши данные"), getMarkup(1),
+                "В меню", USER_GET_MENU.toString());
+        putTextButton(LESSONS_MENU, getMessage("Выберите действие:"), getMarkup(2, 2),
+                "Показать последние уроки", RECENT_LESSONS.toString(), "Поиск по номеру", SEARCH_LESSON_BY_NUMBER.toString(),
+                "Поиск по ключевому слову", SEARCH_LESSON_BY_KEYWORD.toString(), "Все ключевые слова", SHOW_ALL_KEYWORDS.toString());
+        putTextButton(SHOW_ALL_KEYWORDS, getMessage("Доступные ключевые слова:\r\n"), getMarkup(2),
+                "В меню", USER_GET_MENU.toString(), "Найти по слову", SEARCH_LESSON_BY_KEYWORD.toString());
+        putTextButton(SEARCH_LESSON_BY_NUMBER, getMessage("Введите номер урока:", "Необходимо ввести число, попробуйте еще раз:"),
+                getMarkup(2), "В меню", USER_GET_MENU.toString(), "Другой номер", SEARCH_LESSON_BY_NUMBER.toString());
+        putTextButton(SEARCH_LESSON_BY_KEYWORD, getMessage("Введите ключевое слово:", "Необходимо ввести ключевое слово, попробуйте еще рaз!"),
+                getMarkup(3), "В меню", USER_GET_MENU.toString(), "Другое слово", SEARCH_LESSON_BY_KEYWORD.toString(),
+                "К списку слов", SHOW_ALL_KEYWORDS.toString());
+        putTextButton(RECENT_LESSONS, getMessage("Список последних уроков:"), getMarkup(1),
+                "В меню", USER_GET_MENU.toString());
+        putText(USER_UPLOAD_HOMEWORK, "Перенесите файл в чат. Файл должен быть .zip или .rar архивом, менее 10МБ.",
+                "Неверный формат файла. Загрузите правильный файл.");
+        putTextButton(FINISH_UPLOAD_HOMEWORK, getMessage("Домашнее задание успешно загружено"), getMarkup(1),
+                "В меню", USER_GET_MENU.toString());
 
         //ADMIN USER
         putTextButton(ADMIN_GET_MENU, getMessage("ADMIN MENU:"), getMarkup(2),
@@ -50,11 +68,11 @@ public class InMemoryMessageKeyboardRepository implements MessageKeyboardReposit
         repository.put(commandName, new MessageKeyboard(messages, rowsMarkup, buttonsData));
     }
 
-    private void putText(CommandName commandName, String...messages) {
+    private void putText(CommandName commandName, String... messages) {
         repository.put(commandName, new MessageKeyboard(messages));
     }
 
-    private String[] getMessage(String...messages) {
+    private String[] getMessage(String... messages) {
         return messages;
     }
 

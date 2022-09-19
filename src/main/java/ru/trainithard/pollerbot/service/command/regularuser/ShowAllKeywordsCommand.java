@@ -30,7 +30,7 @@ public class ShowAllKeywordsCommand extends AbstractCommand {
         userMessage.setPreviousCommandName(getCommandName());
         saveSession(userMessage);
 
-        SendMessage reply = getCustomTextButtonMessage(userMessage, columnOutputFormatter.format(keywords, OUTPUT_COLUMNS));
+        SendMessage reply = getCustomMessage(userMessage, columnOutputFormatter.format(keywords, OUTPUT_COLUMNS));
         reply.setParseMode("Markdown");
         return reply;
     }

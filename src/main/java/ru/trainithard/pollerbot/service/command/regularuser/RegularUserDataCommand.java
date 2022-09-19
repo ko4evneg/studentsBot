@@ -12,7 +12,7 @@ import static ru.trainithard.pollerbot.service.command.CommandName.USER_GET_DATA
 public class RegularUserDataCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        return getCustomTextButtonMessage(userMessage, getUserDataMessage(userMessage));
+        return getCustomMessage(userMessage, getUserDataMessage(userMessage));
     }
 
     private String getUserDataMessage(UserMessage userMessage) {

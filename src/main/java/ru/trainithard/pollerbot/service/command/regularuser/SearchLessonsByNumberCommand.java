@@ -23,7 +23,7 @@ public class SearchLessonsByNumberCommand extends AbstractCommand {
     public BotApiMethodMessage execute(UserMessage userMessage) {
         if (isFirstInvocation(userMessage)) {
             saveSessionPreviousCommand(userMessage);
-            return getTextMessage(userMessage);
+            return getStandardTextMessage(userMessage);
         }
 
         if (!validateInputIsNumber(userMessage)) {
@@ -34,9 +34,9 @@ public class SearchLessonsByNumberCommand extends AbstractCommand {
         userMessage.setPreviousCommandName(LESSONS_MENU);
         saveSession(userMessage);
         if (lessonOptional.isPresent()) {
-            return getCustomTextButtonMessage(userMessage, getLessonString(lessonOptional.get()));
+            return getCustomMessage(userMessage, getLessonString(lessonOptional.get()));
         } else {
-            return getCustomTextButtonMessage(userMessage, "Урок с таким номером не найден!");
+            return getCustomMessage(userMessage, "Урок с таким номером не найден!");
         }
     }
 

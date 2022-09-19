@@ -13,7 +13,7 @@ public class FinishUploadHomeworkCommand extends AbstractCommand {
 
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        return getTextButtonMessage(userMessage);
+        return getStandardMessage(userMessage);
     }
 
     @Override

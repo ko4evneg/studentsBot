@@ -77,17 +77,8 @@ public abstract class AbstractCommand {
         return userService.find(userMessage.getUserId());
     }
 
-    protected SendMessage getCustomButtonTextMessage(UserMessage userMessage, List<List<Button>> buttons) {
-        return messageConstructor.constructTextButtons(userMessage,
-                commandNameReplyRepository.findText(getCommandName()), buttons);
-    }
-
     protected SendMessage getStandardTextMessage(UserMessage userMessage) {
         return messageConstructor.constructText(userMessage.getChatId(), getMessageKeyboard().getMessage());
-    }
-
-    private MessageKeyboard getMessageKeyboard() {
-        return messageKeyboardRepository.find(getCommandName());
     }
 
     protected SendMessage getStandardMessage(UserMessage userMessage) {
@@ -100,5 +91,13 @@ public abstract class AbstractCommand {
 
     protected SendMessage getCustomMessage(UserMessage userMessage, String text) {
         return messageConstructor.constructCustomTextButtons(userMessage, getMessageKeyboard(), text);
+    }
+
+    protected SendMessage getCustomButtonsMessage(UserMessage userMessage, int[] buttonsMarkup, String...buttons) {
+        return messageConstructor.constructCustomTextButtons(userMessage, getMessageKeyboard(), buttonsMarkup, buttons);
+    }
+
+    private MessageKeyboard getMessageKeyboard() {
+        return messageKeyboardRepository.find(getCommandName());
     }
 }

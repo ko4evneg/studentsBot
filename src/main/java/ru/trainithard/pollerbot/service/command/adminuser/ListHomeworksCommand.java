@@ -12,14 +12,11 @@ import static ru.trainithard.pollerbot.service.command.CommandName.LIST_HOMEWORK
 @Component
 @RequiredArgsConstructor
 public class ListHomeworksCommand extends FileButtonsCommand {
-    private static final int BUTTONS_IN_ROW = 3;
-
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         saveSessionPreviousCommand(userMessage);
-        return getCustomButtonTextMessage(userMessage,
-                getStudentHomeworkFolderButtons(storageService.getStudentFolderNames(), "dir",
-                        DOWNLOAD_HOMEWORK, BUTTONS_IN_ROW));
+        String[] dirs = getStudentHomeworkButtons(storageService.getStudentFolderNames(), "dir", DOWNLOAD_HOMEWORK);
+        return getCustomButtonsMessage(userMessage, getMarkup(dirs), dirs);
     }
 
     @Override

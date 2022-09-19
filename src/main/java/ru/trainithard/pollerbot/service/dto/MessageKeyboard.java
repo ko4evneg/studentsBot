@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 public class MessageKeyboard {
     public static final int STANDARD_MESSAGES_END_INDEX = 1;

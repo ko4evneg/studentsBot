@@ -52,6 +52,15 @@ public class MessageConstructor {
         return construct(userMessage.getChatId(), messageKeyboard.getErrorMessage());
     }
 
+    public SendMessage constructCustomTextButtons(UserMessage userMessage, MessageKeyboard messageKeyboard,
+                                                  int[] buttonsMarkup, String... buttons) {
+        SendMessage reply = construct(userMessage.getChatId(), messageKeyboard.getMessage());
+        messageKeyboard.setButtonInRowsMarkup(buttonsMarkup);
+        messageKeyboard.setButtonRows(buttons);
+        reply.setReplyMarkup(createKeyboard(userMessage, buttonConstructor.constructButtons(messageKeyboard)));
+        return reply;
+    }
+
     public SendMessage constructCustomTextButtons(UserMessage userMessage, MessageKeyboard messageKeyboard, String text) {
         SendMessage reply = construct(userMessage.getChatId(), text);
         if (messageKeyboard.hasButtons()) {

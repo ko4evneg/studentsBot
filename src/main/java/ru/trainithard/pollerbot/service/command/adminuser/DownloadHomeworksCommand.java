@@ -22,7 +22,6 @@ import static ru.trainithard.pollerbot.service.command.CommandName.DOWNLOAD_HOME
 @Component
 @RequiredArgsConstructor
 public class DownloadHomeworksCommand extends FileButtonsCommand {
-    private static final int BUTTONS_IN_ROW = 3;
     private final HomeworkFilesStorageService storageService;
     private final StringMetaDataManager metaDataManager;
     private final PollerBotProxy pollerBotProxy;
@@ -32,9 +31,9 @@ public class DownloadHomeworksCommand extends FileButtonsCommand {
         if (isFirstInvocation(userMessage)) {
             String studentDirectoryName = metaDataManager.getMetaDataValue(userMessage.getCallbackData(), "dir");
             List<String> studentHomeworkFiles = storageService.getStudentHomeworkFiles(studentDirectoryName);
+            String[] filesButtons = getStudentHomeworkButtons(studentHomeworkFiles, "fil", getCommandName());
             saveSessionPreviousCommand(userMessage);
-            return getCustomButtonTextMessage(userMessage, getStudentHomeworkFolderButtons(studentHomeworkFiles,
-                    "fl", DOWNLOAD_HOMEWORK, BUTTONS_IN_ROW));
+            return getCustomButtonsMessage(userMessage, getMarkup(filesButtons), filesButtons);
         }
 
         try {
@@ -58,7 +57,7 @@ public class DownloadHomeworksCommand extends FileButtonsCommand {
 
     private File getHomeworkFile(UserMessage userMessage) {
         String studentFolderName = userMessage.getEmailInFileFormat();
-        String studentFileName = metaDataManager.getMetaDataValue(userMessage.getCallbackData(), "fl");
+        String studentFileName = metaDataManager.getMetaDataValue(userMessage.getCallbackData(), "fil");
         return storageService.getHomeworkFile(studentFolderName, studentFileName);
     }
 

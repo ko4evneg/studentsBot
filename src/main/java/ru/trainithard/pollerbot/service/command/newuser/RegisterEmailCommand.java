@@ -24,7 +24,7 @@ public class RegisterEmailCommand extends AbstractCommand {
         if (!validator.validate(userMessage.getMessage())) {
             return getErrorMessage(userMessage);
         } else {
-            getUser(userMessage).setEmail(userMessage.getMessage());
+            getUser(userMessage).setEmail(userMessage.getMessage().toLowerCase());
             userMessage.setNextCommandName(CommandName.REGISTER_NAMES);
             saveUserSession(userMessage);
             return registerNamesCommand.execute(userMessage);

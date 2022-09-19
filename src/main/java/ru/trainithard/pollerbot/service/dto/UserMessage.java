@@ -9,6 +9,8 @@ import ru.trainithard.pollerbot.model.Session;
 import ru.trainithard.pollerbot.model.User;
 import ru.trainithard.pollerbot.service.command.CommandName;
 
+import java.util.Locale;
+
 @Getter
 @Setter
 @Builder
@@ -42,7 +44,7 @@ public class UserMessage {
     }
 
     public String getEmailInFileFormat() {
-        String email = getEmail().replace("@", "_");
+        String email = getEmail().toLowerCase().replace("@", "_");
         return email.replaceAll("\\.\\D+$", "");
     }
 

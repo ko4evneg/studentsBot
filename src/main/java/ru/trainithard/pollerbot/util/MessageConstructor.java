@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import ru.trainithard.pollerbot.exception.PollerBotException;
 import ru.trainithard.pollerbot.service.command.CommandName;
+import ru.trainithard.pollerbot.service.dto.MessageKeyboard;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 
 import java.util.List;
@@ -38,9 +39,9 @@ public class MessageConstructor {
         return reply;
     }
 
-    public SendMessage constructTextButtons(UserMessage userMessage, String text, int[] buttonsMarkup, String...stringButtons) {
-        List<List<Button>> buttons = buttonConstructor.constructButtons(buttonsMarkup, stringButtons);
-        SendMessage reply = construct(userMessage.getChatId(), text);
+    public SendMessage constructTextButtons(UserMessage userMessage, MessageKeyboard messageKeyboard) {
+        List<List<Button>> buttons = buttonConstructor.constructButtons(messageKeyboard);
+        SendMessage reply = construct(userMessage.getChatId(), messageKeyboard.getMessageOne());
         reply.setReplyMarkup(createKeyboard(userMessage, buttons));
         return reply;
     }

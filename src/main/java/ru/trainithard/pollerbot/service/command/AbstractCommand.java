@@ -5,6 +5,7 @@ import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMess
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import ru.trainithard.pollerbot.model.User;
 import ru.trainithard.pollerbot.repository.CommandNameReplyRepository;
+import ru.trainithard.pollerbot.repository.MessageKeyboardRepository;
 import ru.trainithard.pollerbot.service.SessionService;
 import ru.trainithard.pollerbot.service.UserService;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
@@ -12,7 +13,7 @@ import ru.trainithard.pollerbot.util.MessageConstructor;
 
 import java.util.List;
 
-import static ru.trainithard.pollerbot.util.MessageConstructor.*;
+import static ru.trainithard.pollerbot.util.MessageConstructor.Button;
 
 public abstract class AbstractCommand {
     @Autowired
@@ -23,6 +24,8 @@ public abstract class AbstractCommand {
     protected SessionService sessionService;
     @Autowired
     protected CommandNameReplyRepository commandNameReplyRepository;
+    @Autowired
+    protected MessageKeyboardRepository messageKeyboardRepository;
 
     /**
      * Executes command based on UserMessage data.
@@ -104,5 +107,9 @@ public abstract class AbstractCommand {
 
     protected User getFreshUser(UserMessage userMessage) {
         return userService.find(userMessage.getUserId());
+    }
+
+    protected SendMessage getStandardMessage(UserMessage userMessage) {
+        return messageConstructor.constructTextButtons(userMessage, messageKeyboardRepository.find(getCommandName()));
     }
 }

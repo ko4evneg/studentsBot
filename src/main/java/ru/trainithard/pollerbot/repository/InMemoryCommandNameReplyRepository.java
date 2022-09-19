@@ -20,17 +20,12 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
     @PostConstruct
     public void fill() {
         //new user texts
-        putButtonedReply(NO_COMMAND, getArrayOf("Вас приветствует TrainItHard бот. Для использования требуется регистрация: ",
-                "Хотите начать регистрацию?"), List.of(List.of(new Button("Начать регистрацию", REGISTER_EMAIL))));
         putTextReply(REGISTER_NAMES, "Укажите Имя и Фамилию (в таком же порядке): ", "Неверные Имя Фамилия, попробуйте еще раз:");
         putTextReply(REGISTER_EMAIL, "Укажите email для связи: ", "Неверный email, попробуйте еще раз:");
         putButtonedReply(FINISH_REGISTRATION, getArrayOf("Успешная регистрация!", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
 
         //regular user texts
-        putButtonedReply(USER_GET_MENU, getArrayOf("МЕНЮ", ""),
-                List.of(List.of(new Button("Мои данные", USER_GET_DATA), new Button("Уроки", LESSONS_MENU)),
-                        List.of(new Button("Загрузить домашнее задание", USER_UPLOAD_HOMEWORK))));
         putButtonedReply(USER_GET_DATA, getArrayOf("Ваши данные", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
         putButtonedReply(LESSONS_MENU, getArrayOf("Выберите действие:", ""),
@@ -53,8 +48,6 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
 
         //admin texts
-        putButtonedReply(ADMIN_GET_MENU, getArrayOf("ADMIN MENU:", ""),
-                List.of(List.of(new Button("Notify all", CONSTRUCT_NOTIFICATION), new Button("Download homework", LIST_HOMEWORKS_FOLDERS))));
         putTextReply(CONSTRUCT_NOTIFICATION, "Enter notification text:", "");
         putTextReply(LIST_HOMEWORKS_FOLDERS, "Select student:", "");
         putTextReply(DOWNLOAD_HOMEWORK, "Select homework:", "");

@@ -8,6 +8,6 @@ public abstract class StartRoleCommand extends AbstractCommand {
     public BotApiMethodMessage execute(UserMessage userMessage) {
         userMessage.getSession().reset();
         saveSession(userMessage);
-        return getTextButtonMessage(userMessage);
+        return getStandardMessage(userMessage);
     }
 }

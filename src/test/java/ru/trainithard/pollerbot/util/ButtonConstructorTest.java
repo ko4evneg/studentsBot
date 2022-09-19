@@ -1,6 +1,7 @@
 package ru.trainithard.pollerbot.util;
 
 import org.junit.jupiter.api.Test;
+import ru.trainithard.pollerbot.service.dto.MessageKeyboard;
 
 import java.util.List;
 
@@ -23,7 +24,8 @@ class ButtonConstructorTest {
                 List.of(new Button("7", "8"), new Button("9", "10"), new Button("11", "12")),
                 List.of(new Button("13", "14"), new Button("15", "16")));
 
-        List<List<Button>> buttons = buttonConstructor.constructButtons(new int[]{2, 1, 3, 2}, stringButtons);
+        MessageKeyboard keyboard = new MessageKeyboard(new String[]{}, new int[]{2, 1, 3, 2}, stringButtons);
+        List<List<Button>> buttons = buttonConstructor.constructButtons(keyboard);
 
         assertEquals(expectedButtons.size(), buttons.size());
         assertThat(buttons).usingRecursiveFieldByFieldElementComparator()

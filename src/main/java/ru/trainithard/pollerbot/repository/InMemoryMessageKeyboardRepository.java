@@ -33,6 +33,17 @@ public class InMemoryMessageKeyboardRepository implements MessageKeyboardReposit
         //ADMIN USER
         putTextButton(ADMIN_GET_MENU, getMessage("ADMIN MENU:"), getMarkup(2),
                 "Notify all", CONSTRUCT_NOTIFICATION.toString(), "Download homework", LIST_HOMEWORKS_FOLDERS.toString());
+        putText(CONSTRUCT_NOTIFICATION, "Enter notification text:");
+        putText(LIST_HOMEWORKS_FOLDERS, "Select student:");
+        putText(DOWNLOAD_HOMEWORK, "Select homework:");
+        putText(NOTIFY_ALL, "Notification has been sent!", "Notification has failed!");
+
+        //TEXT COMMANDS
+        putText(RESET_SESSION, "Сессия успешно сброшена");
+        putText(HELP, "Помощь:\r\n /reset - сброс сессии пользователя");
+        putText(ELEVATE, "Elevation successful", "No rights for elevation");
+        putText(DELEVATE, "De-elevation successful", "No rights for de-elevation");
+
     }
 
     private void putTextButton(CommandName commandName, String[] messages, int[] rowsMarkup, String... buttonsData) {

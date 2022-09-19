@@ -9,7 +9,7 @@ public class HelpCommand extends AbstractCommand {
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
         saveSessionPreviousCommand(userMessage);
-        return getTextMessage(userMessage);
+        return getStandardMessage(userMessage);
     }
 
     @Override

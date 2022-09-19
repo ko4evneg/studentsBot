@@ -40,18 +40,6 @@ public class InMemoryCommandNameReplyRepository implements CommandNameReplyRepos
                 "Неверный формат файла. Загрузите правильный файл."));
         putButtonedReply(FINISH_UPLOAD_HOMEWORK, getArrayOf("Домашнее задание успешно загружено", ""),
                 List.of(List.of(new Button("В меню", USER_GET_MENU))));
-
-        //admin texts
-        putTextReply(CONSTRUCT_NOTIFICATION, "Enter notification text:", "");
-        putTextReply(LIST_HOMEWORKS_FOLDERS, "Select student:", "");
-        putTextReply(DOWNLOAD_HOMEWORK, "Select homework:", "");
-        putTextReply(NOTIFY_ALL, "Notification has been sent!", "Notification has failed!");
-
-        //text commands
-        putTextReply(RESET_SESSION, "Сессия успешно сброшена", "");
-        putTextReply(HELP, "Помощь:\r\n /reset - сброс сессии пользователя", "");
-        putTextReply(ELEVATE, "Elevation successful", "No rights for elevation");
-        putTextReply(DELEVATE, "De-elevation successful", "No rights for de-elevation");
     }
 
     private void putTextReply(CommandName notifyAll, String... replyTexts) {

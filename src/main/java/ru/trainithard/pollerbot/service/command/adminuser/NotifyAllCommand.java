@@ -21,7 +21,7 @@ public class NotifyAllCommand extends AbstractCommand {
     public BotApiMethodMessage execute(UserMessage userMessage) {
         try {
             notificationService.notifyAll(userMessage.getMessage());
-            return getTextMessage(userMessage);
+            return getStandardMessage(userMessage);
         } catch (PollerBotException e) {
             return getErrorMessage(userMessage);
         } finally {

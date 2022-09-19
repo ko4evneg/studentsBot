@@ -13,7 +13,7 @@ public class ResetSessionCommand extends AbstractCommand {
         userMessage.setUser(getFreshUser(userMessage));
         userMessage.getSession().reset();
         saveSession(userMessage);
-        return getTextMessage(userMessage);
+        return getStandardMessage(userMessage);
     }
 
     @Override

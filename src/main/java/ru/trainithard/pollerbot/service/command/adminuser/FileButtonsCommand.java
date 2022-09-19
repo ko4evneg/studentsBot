@@ -15,7 +15,7 @@ public abstract class FileButtonsCommand extends AbstractCommand {
     protected StringMetaDataManager metaDataManager;
     @Autowired
     protected HomeworkFilesStorageService storageService;
-
+//todo move to string-button
     protected List<List<MessageConstructor.Button>> getStudentHomeworkFolderButtons(List<String> pathNames, String param,
                                                                                     CommandName nextCommand, int buttonsInRow) {
         List<List<String>> studentHomeworkFolderNamesMarkedUp = Lists.partition(pathNames, buttonsInRow);

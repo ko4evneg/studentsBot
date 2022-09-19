@@ -22,6 +22,8 @@ public class NotifyConstructCommand extends AbstractCommand {
         }
 
         userMessage.getSession().setNextCommandName(CommandName.NOTIFY_ALL);
+        userMessage.getSession().setNotificationText(userMessage.getMessage());
+        saveSession(userMessage);
         return notifyAllCommand.execute(userMessage);
     }
 

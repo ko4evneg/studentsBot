@@ -19,9 +19,14 @@ public class NotifyAllCommand extends AbstractCommand {
 
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
+        if (isFirstInvocation(userMessage)) {
+            saveSessionPreviousCommand(userMessage);
+            return getCustomMessage(userMessage, "Confirm");
+        }
+
         try {
-            notificationService.notifyAll(userMessage.getMessage());
-            return getStandardMessage(userMessage);
+            notificationService.notifyAll(userMessage.getSession().getNotificationText());
+            return getCustomButtonsMessage(userMessage, new int[]{1}, "To menu...", ADMIN_GET_MENU.toString());
         } catch (PollerBotException e) {
             return getErrorMessage(userMessage);
         } finally {

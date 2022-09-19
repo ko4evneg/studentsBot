@@ -8,7 +8,6 @@ Bot abilities:
 
 _Todo:_
 - add personal notifications
-- admin: add notify all confirmation
 - add polling for lessons
 - users authorization
 - add file names reduction

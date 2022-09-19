@@ -33,12 +33,6 @@ public class MessageConstructor {
                 .build();
     }
 
-    public SendMessage constructTextButtons(UserMessage userMessage, String text, List<List<Button>> buttons) {
-        SendMessage reply = construct(userMessage.getChatId(), text);
-        reply.setReplyMarkup(createKeyboard(userMessage, buttons));
-        return reply;
-    }
-
     public SendMessage constructTextButtons(UserMessage userMessage, MessageKeyboard messageKeyboard) {
         SendMessage reply = construct(userMessage.getChatId(), messageKeyboard.getMessage());
         if (messageKeyboard.hasButtons()) {

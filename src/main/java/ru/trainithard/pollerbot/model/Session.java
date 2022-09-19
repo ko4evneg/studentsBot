@@ -14,6 +14,7 @@ public class Session {
     private Role role;
     private long version;
     private LocalDateTime lastAccessTime;
+    private String notificationText;
 
     public Session(Role role) {
         this.role = role;
@@ -23,6 +24,8 @@ public class Session {
     public void reset() {
         setPreviousCommandName(getRole().getStartCommand());
         setNextCommandName(getRole().getStartCommand());
+        version = 0;
+        notificationText = null;
     }
 
     public CommandName getNextCommandName() {

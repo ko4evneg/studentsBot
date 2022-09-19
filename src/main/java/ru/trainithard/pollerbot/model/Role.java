@@ -8,6 +8,7 @@ import ru.trainithard.pollerbot.service.command.CommandName;
 @RequiredArgsConstructor
 public enum Role {
     NEW(CommandName.NO_COMMAND),
+    AUTH_PENDING(CommandName.AUTH_PENDING),
     USER(CommandName.USER_GET_MENU),
     ADMIN(CommandName.ADMIN_GET_MENU);
 

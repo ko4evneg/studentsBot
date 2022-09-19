@@ -14,6 +14,8 @@ public enum CommandName {
     REGISTER_EMAIL,
     FINISH_REGISTRATION,
 
+    AUTH_PENDING,
+
     USER_GET_MENU,
     USER_GET_DATA,
     LESSONS_MENU,
@@ -29,6 +31,7 @@ public enum CommandName {
     CONSTRUCT_NOTIFICATION,
     LIST_HOMEWORKS_FOLDERS,
     DOWNLOAD_HOMEWORK,
+    AUTHORIZE_USER,
 
     HELP("/help"),
     RESET_SESSION("/reset"),

@@ -14,6 +14,8 @@ public interface UserRepository {
 
     List<User> findByRole(Role role);
 
+    User findByEmail(String email);
+
     User save(User user);
 
     List<Long> findAllChatIds();

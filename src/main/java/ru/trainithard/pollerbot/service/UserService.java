@@ -12,6 +12,8 @@ public interface UserService {
 
     List<User> findByRole(Role role);
 
+    User findByEmail(String email);
+
     List<Long> findAllChatIds();
 
     void save(User user);

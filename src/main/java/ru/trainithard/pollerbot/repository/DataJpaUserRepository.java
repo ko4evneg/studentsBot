@@ -12,4 +12,6 @@ public interface DataJpaUserRepository extends JpaRepository<User, Long> {
     List<Long> findAllChatIds();
 
     List<User> findByRole(Role role);
+
+    User findByEmail(String email);
 }

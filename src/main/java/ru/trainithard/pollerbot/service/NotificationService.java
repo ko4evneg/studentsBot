@@ -6,6 +6,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.trainithard.pollerbot.exception.PollerBotException;
 import ru.trainithard.pollerbot.model.Role;
+import ru.trainithard.pollerbot.model.User;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,22 @@ public class NotificationService {
     public void notifyAll(String messageText) {
         userService.findAllChatIds()
                 .forEach((chatId) -> trySend(messageText, chatId));
+    }
+
+    public void notifyAdmins(SendMessage sendMessage) {
+        userService.findByRole(Role.ADMIN)
+                .forEach((user) -> {
+                    sendMessage.setChatId(user.getChatId());
+                    trySend(sendMessage);
+                });
+    }
+
+    private void trySend(SendMessage sendMessage) {
+        try {
+            pollerBot.execute(sendMessage);
+        } catch (TelegramApiException e) {
+            throw new PollerBotException("Can't send message with text: " + sendMessage.getText(), e);
+        }
     }
 
     public void notifyAdmins(String messageText) {
@@ -29,5 +46,10 @@ public class NotificationService {
         } catch (TelegramApiException e) {
             throw new PollerBotException("Can't send message with text: " + messageText, e);
         }
+    }
+
+    public void notifyUser(Long userId, SendMessage sendMessage) {
+        User user = userService.find(userId);
+        trySend(text, user.getChatId());
     }
 }

@@ -14,8 +14,8 @@ public class ColumnOutputFormatter {
         StringBuilder sb = new StringBuilder();
         for (int rowIndex = 0; rowIndex < getNumberOfWordsInColumn(stringsArray, numberOfColumns); rowIndex++) {
             for (int columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
-                if (rowIndex + numberOfColumns * columnIndex < stringsArray.length) {
-                    sb.append(String.format("%-15s", stringsArray[rowIndex + numberOfColumns * columnIndex]));
+                if (rowIndex + getNumberOfWordsInColumn(stringsArray, numberOfColumns) * columnIndex < stringsArray.length) {
+                    sb.append(String.format("%-20s", stringsArray[rowIndex + getNumberOfWordsInColumn(stringsArray, numberOfColumns) * columnIndex]));
                 }
             }
             sb.append("\n");

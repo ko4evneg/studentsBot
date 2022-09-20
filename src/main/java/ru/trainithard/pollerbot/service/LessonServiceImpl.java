@@ -8,6 +8,7 @@ import ru.trainithard.pollerbot.repository.LessonsRepository;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -29,11 +30,14 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public List<Lesson> findByKeyword(String keyword) {
-        return repository.findByKeyword(keyword);
+        List<Lesson> lessons = repository.findByKeyword(keyword.toUpperCase());
+        lessons.addAll(repository.findByKeyword(keyword.toLowerCase()));
+        lessons.addAll(repository.findByKeyword(keyword));
+        return lessons;
     }
 
     @Override
-    public List<String> findAllKeywords() {
+    public Set<String> findAllKeywords() {
         return repository.findAllKeywords();
     }
 }

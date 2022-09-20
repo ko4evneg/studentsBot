@@ -10,6 +10,7 @@ import ru.trainithard.pollerbot.service.command.CommandName;
 import ru.trainithard.pollerbot.service.component.ColumnOutputFormatter;
 import ru.trainithard.pollerbot.service.dto.UserMessage;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,13 +19,13 @@ import static ru.trainithard.pollerbot.service.command.CommandName.SHOW_ALL_KEYW
 @Component
 @RequiredArgsConstructor
 public class ShowAllKeywordsCommand extends AbstractCommand {
-    private static final int OUTPUT_COLUMNS = 5;
+    private static final int OUTPUT_COLUMNS = 4;
     private final LessonService lessonService;
     private final ColumnOutputFormatter columnOutputFormatter;
 
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        List<String> keywords = lessonService.findAllKeywords();
+        List<String> keywords = new ArrayList<>(lessonService.findAllKeywords());
         Collections.sort(keywords);
 
         userMessage.setPreviousCommandName(getCommandName());
@@ -32,6 +33,7 @@ public class ShowAllKeywordsCommand extends AbstractCommand {
 
         SendMessage reply = getCustomMessage(userMessage, columnOutputFormatter.format(keywords, OUTPUT_COLUMNS));
         reply.setParseMode("Markdown");
+        reply.disableWebPagePreview();
         return reply;
     }
 

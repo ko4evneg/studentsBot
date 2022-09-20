@@ -49,6 +49,7 @@ public class SearchLessonsByKeywordCommand extends AbstractCommand {
         return lessons.stream()
                 .sorted(Comparator.comparing(Lesson::getNumber))
                 .map(this::getLessonString)
+                .distinct()
                 .reduce(String::concat)
                 .orElse("уроков нет");
     }

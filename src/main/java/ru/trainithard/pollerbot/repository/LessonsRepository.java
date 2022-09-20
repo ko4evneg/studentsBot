@@ -6,11 +6,12 @@ import org.springframework.data.repository.query.Param;
 import ru.trainithard.pollerbot.model.Lesson;
 
 import java.util.List;
+import java.util.Set;
 
 public interface LessonsRepository extends JpaRepository<Lesson, Integer> {
     @Query(value = "SELECT l FROM Lesson l WHERE :keyword member of l.keywords")
     List<Lesson> findByKeyword(@Param("keyword") String keyword);
 
     @Query(value = "SELECT keyword FROM Keywords", nativeQuery = true)
-    List<String> findAllKeywords();
+    Set<String> findAllKeywords();
 }

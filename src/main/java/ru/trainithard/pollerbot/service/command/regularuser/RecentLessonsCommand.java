@@ -3,6 +3,7 @@ package ru.trainithard.pollerbot.service.command.regularuser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.botapimethods.BotApiMethodMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import ru.trainithard.pollerbot.model.Lesson;
 import ru.trainithard.pollerbot.service.LessonService;
 import ru.trainithard.pollerbot.service.command.AbstractCommand;
@@ -22,12 +23,15 @@ public class RecentLessonsCommand extends AbstractCommand {
     private final LessonService lessonService;
     @Override
     public BotApiMethodMessage execute(UserMessage userMessage) {
-        return getCustomMessage(userMessage, composeLessonsMessage());
+        SendMessage reply = getCustomMessage(userMessage, composeLessonsMessage());
+        reply.setParseMode("html");
+        reply.disableWebPagePreview();
+        return reply;
     }
 
     private String composeLessonsMessage() {
         List<Lesson> lessons = lessonService.findLatest(LESSONS_QUANTITY_TO_FETCH);
-        return "Список последних уроков: \r\n" + getAllLessonsString(lessons);
+        return "Список последних уроков: \n" + getAllLessonsString(lessons);
     }
 
     private String getAllLessonsString(List<Lesson> lessons) {
@@ -39,7 +43,7 @@ public class RecentLessonsCommand extends AbstractCommand {
     }
 
     private String getLessonString(Lesson lesson) {
-        return String.format("%d: %s \r\n %s\r\n", lesson.getNumber(), lesson.getTitle(), lesson.getUrl());
+        return String.format("<b>%d: %s</b>\n%s\nhomework:\n%s\n\n", lesson.getNumber(), lesson.getTitle(), lesson.getUrl(), lesson.getHomework());
     }
 
     @Override

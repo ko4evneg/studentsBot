@@ -20,9 +20,9 @@ public class PollerBot extends TelegramLongPollingBot {
         pollerBotProxy.setPollerBot(this);
     }
 
-    @Value(value = "#{environment.botToken ?: \"${pollerbot.token}\"}")
+    @Value(value = "#{environment.botToken}")
     private String token;
-    @Value(value = "#{environment.botUsername ?: \"${pollerbot.username}\"}")
+    @Value(value = "#{environment.botUsername}")
     private String username;
 
     @Override

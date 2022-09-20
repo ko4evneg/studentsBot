@@ -15,9 +15,9 @@ import static java.util.stream.Collectors.toMap;
 
 @Configuration
 public class BeanConfiguration {
-    @Value(value = "#{environment.dbPassword ?: \"${spring.datasource.password}\"}")
+    @Value(value = "#{environment.dbPassword}")
     private String datasourcePassword;
-    @Value("${spring.datasource.username}")
+    @Value(value = "#{environment.dbUser}")
     private String datasourceUsername;
     @Value("${spring.datasource.url}")
     private String datasourceUrl;

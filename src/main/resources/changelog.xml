@@ -45,4 +45,7 @@
             <column name="keyword"/>
         </createIndex>
     </changeSet>
+    <changeSet id="fill_01" author="ko4evneG">
+        <sqlFile path="sql/init.sql" encoding="utf8"/>
+    </changeSet>
 </databaseChangeLog>

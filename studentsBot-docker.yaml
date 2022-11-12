@@ -1,0 +1,10 @@
+version: '3'
+services:
+  students-postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - "./src/main/resources/sql/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql"
